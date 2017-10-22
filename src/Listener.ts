@@ -64,7 +64,8 @@ export default class Listener {
                      //   conversation.continue(req, res); // need to get a conversation unique to each person
 
                         console.log("Going to send response");
-                        this.sendResponse(webhookEvent.sender.id, webhookEvent.message.text);
+                        this.sendResponse(webhookEvent.sender.id,
+                            {"text": webhookEvent.message.text});
                         return;
                     }
 
@@ -109,7 +110,7 @@ export default class Listener {
         });
     }
 
-    sendResponse(psid : string, response : string) {
+    sendResponse(psid : string, response : any) {
             // Construct the message body
             let request_body = {
                 "recipient": {

@@ -39,7 +39,7 @@ var Listener = (function () {
                         //   let conversation : Conversation = new WelcomeConversation(webhookEvent.sender.id);
                         //   conversation.continue(req, res); // need to get a conversation unique to each person
                         console.log("Going to send response");
-                        _this.sendResponse(webhookEvent.sender.id, webhookEvent.message.text);
+                        _this.sendResponse(webhookEvent.sender.id, { "text": webhookEvent.message.text });
                         return;
                     }
                     //  console.log(webhookEvent);
