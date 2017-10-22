@@ -30,11 +30,14 @@ export default class Listener {
         // POST creates endpoint for webhook
         app.post('/webhook', (req: any, res: any) => {
 
+            console.log("Into webhook");
 
             let body = req.body;
 
             // Verify this is event from page subscription
             if (body.object == 'page') {
+
+                console.log("From page");
 
                 // Iterate over entries
                 body.entry.foreach(function (entry: any) {

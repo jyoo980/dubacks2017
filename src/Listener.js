@@ -19,9 +19,11 @@ var Listener = (function () {
         app.get("/", function (req, res) { return res.send("GET REQUEST SUCCESSFUL\n"); });
         // POST creates endpoint for webhook
         app.post('/webhook', function (req, res) {
+            console.log("Into webhook");
             var body = req.body;
             // Verify this is event from page subscription
             if (body.object == 'page') {
+                console.log("From page");
                 // Iterate over entries
                 body.entry.foreach(function (entry) {
                     var webhookEvent = entry.messaging[0];
