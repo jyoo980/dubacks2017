@@ -1,0 +1,11 @@
+{
+  "name": "dubhacks",
+  "version": "1.0.0",
+  "description": "a repository for our project for DubHacks 2017",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Amy Zhu, James Xiao, James Yoo",
+  "license": "MIT"
+}
