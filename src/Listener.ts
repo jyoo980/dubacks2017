@@ -8,6 +8,10 @@ export default class Listener {
 
     main() {
 
+
+        // VERIFY TOKEN
+        let VERIFY_TOKEN = "VTOKEN";
+
         const
             //bodyParser = require('body-parser'),
             express = require('express'),
@@ -72,8 +76,6 @@ export default class Listener {
         // GET request support with code below
         app.get('/webhook', (req: any, res: any) => {
 
-            // VERIFY TOKEN
-            let VERIFY_TOKEN = "VTOKEN";
 
             // Parse query param. for GET
             let mode = req.query['hub.mode'];

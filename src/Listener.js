@@ -5,6 +5,8 @@ var Listener = (function () {
     function Listener() {
     }
     Listener.prototype.main = function () {
+        // VERIFY TOKEN
+        var VERIFY_TOKEN = "VTOKEN";
         var 
         //bodyParser = require('body-parser'),
         express = require('express'), app = express(), //.use(bodyParser.json);
@@ -47,8 +49,6 @@ var Listener = (function () {
         });
         // GET request support with code below
         app.get('/webhook', function (req, res) {
-            // VERIFY TOKEN
-            var VERIFY_TOKEN = "VTOKEN";
             // Parse query param. for GET
             var mode = req.query['hub.mode'];
             var token = req.query['hub.verify_token'];
