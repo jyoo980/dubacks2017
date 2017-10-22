@@ -7,7 +7,10 @@ var Listener = (function () {
     Listener.prototype.main = function () {
         // VERIFY TOKEN
         var VERIFY_TOKEN = "VTOKEN";
-        var bodyParser = require('body-parser'), express = require('express'), app = express().use(bodyParser.json), https = require('https'), fs = require('fs');
+        var bodyParser = require('body-parser'), express = require('express'), app = express().use(bodyParser.json()), https = require('https'), fs = require('fs');
+        /*app.use(bodyParser.urlencoded({
+            extended: true
+        }));*/
         var port = process.env.PORT || 443;
         var options = {
             key: fs.readFileSync("/etc/letsencrypt/live/dubbyfoods.ca/privkey.pem"),
@@ -26,7 +29,7 @@ var Listener = (function () {
             if (body.object == 'page') {
                 console.log("From page");
                 // Iterate over entries
-                body.entry.foreach(function (entry) {
+                body.entry.forEach(function (entry) {
                     var webhookEvent = entry.messaging[0];
                     console.log(webhookEvent);
                     if (entry.message) {

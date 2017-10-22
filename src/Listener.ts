@@ -15,10 +15,13 @@ export default class Listener {
         const
             bodyParser = require('body-parser'),
             express = require('express'),
-            app = express().use(bodyParser.json),
+            app = express().use(bodyParser.json()),
             https = require('https'),
             fs = require('fs');
 
+        /*app.use(bodyParser.urlencoded({
+            extended: true
+        }));*/
 
         let port = process.env.PORT || 443;
 
@@ -48,7 +51,7 @@ export default class Listener {
                 console.log("From page");
 
                 // Iterate over entries
-                body.entry.foreach(function (entry: any) {
+                body.entry.forEach(function (entry: any) {
 
                     let webhookEvent = entry.messaging[0];
                     console.log(webhookEvent);
