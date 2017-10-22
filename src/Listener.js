@@ -1,5 +1,5 @@
 "use strict";
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 var Listener = (function () {
     function Listener() {
     }
@@ -9,4 +9,4 @@ var Listener = (function () {
     };
     return Listener;
 }());
-exports["default"] = Listener;
+exports.default = Listener;
