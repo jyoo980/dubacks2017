@@ -1,6 +1,6 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var Listener = /** @class */ (function () {
+exports.__esModule = true;
+var Listener = (function () {
     function Listener() {
     }
     Listener.prototype.main = function () {
@@ -9,4 +9,4 @@ var Listener = /** @class */ (function () {
     };
     return Listener;
 }());
-exports.default = Listener;
+exports["default"] = Listener;
