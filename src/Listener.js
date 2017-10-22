@@ -37,6 +37,8 @@ var Listener = (function () {
                         //   let conversation : Conversation = new WelcomeConversation(webhookEvent.sender.id);
                         //   conversation.continue(req, res); // need to get a conversation unique to each person
                         res.status(200).send(entry.message.text);
+                        console.log("Going to send response");
+                        return;
                     }
                     console.log(webhookEvent);
                 });
@@ -46,6 +48,7 @@ var Listener = (function () {
             else {
                 // Return '404 NOT FOUND' response if the event is not from a page subsc.
                 res.sendStatus(404);
+                console.log("404 returned");
             }
         });
         // GET request support with code below
