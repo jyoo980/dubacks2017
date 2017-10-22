@@ -4,9 +4,11 @@ var Listener = (function () {
     function Listener() {
     }
     Listener.prototype.main = function () {
-        var bodyParser = require('body-parser'), express = require('express'), app = express().use(bodyParser.json);
+        var 
+        //bodyParser = require('body-parser'),
+        express = require('express'), app = express(); //.use(bodyParser.json);
         app.listen(process.env.PORT || 5151, function () { return console.log('webhook is listening'); });
-        app.get("/", function (req, res) { return res.send("??? successful get request"); });
+        app.get("/", function (req, res) { return res.send("GET REQUEST SUCCESSFUL\n"); });
         // POST creates endpoint for webhook
         app.post('/webhook', function (req, res) {
             var body = req.body;
@@ -18,7 +20,7 @@ var Listener = (function () {
                     console.log(webhookEvent);
                 });
                 // Returns '200 OK' response to all requests
-                res.status(200).send('EVENT_RECEIVED');
+                res.status(200).send('EVENT_RECEIVED\n');
             }
             else {
                 // Return '404 NOT FOUND' response if the event is not from a page subsc.
@@ -37,7 +39,7 @@ var Listener = (function () {
             if (mode && token) {
                 if (mode === 'subscribe' && token == VERIFY_TOKEN) {
                     // Respond with challenge token from request
-                    console.log('WEBHOOK_VERIFIED');
+                    console.log('WEBHOOK_VERIFIED\n');
                     res.status(200).send(challenge);
                 }
                 else {

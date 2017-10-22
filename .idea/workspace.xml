@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="46068bc3-a1d6-4d0e-8bf5-a2fb659d90bf" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.ts" afterPath="$PROJECT_DIR$/index.ts" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Listener.js" afterPath="$PROJECT_DIR$/src/Listener.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Listener.ts" afterPath="$PROJECT_DIR$/src/Listener.ts" />
     </list>
@@ -22,8 +21,8 @@
       <file leaf-file-name="Listener.ts" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Listener.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="698">
-              <caret line="66" column="1" lean-forward="true" selection-start-line="66" selection-start-column="1" selection-end-line="66" selection-end-column="1" />
+            <state relative-caret-position="209">
+              <caret line="11" column="77" lean-forward="false" selection-start-line="11" selection-start-column="77" selection-end-line="11" selection-end-column="77" />
               <folding />
             </state>
           </provider>
@@ -35,8 +34,8 @@
             <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
-                <marker date="1508644388684" expanded="true" signature="105:2185" ph="{...}" />
-                <marker date="1508644388684" expanded="true" signature="181:2179" ph="{...}" />
+                <marker date="1508645979436" expanded="true" signature="1934:2204" ph="{...}" />
+                <marker date="1508645979436" expanded="true" signature="1934:2210" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -184,7 +183,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5578000" />
+    <option name="totallyTimeSpent" value="6607000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="722" y="0" width="718" height="900" extended-state="0" />
@@ -286,8 +285,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1508644388684" expanded="true" signature="105:2185" ph="{...}" />
-            <marker date="1508644388684" expanded="true" signature="181:2179" ph="{...}" />
+            <marker date="1508645979436" expanded="true" signature="1934:2204" ph="{...}" />
+            <marker date="1508645979436" expanded="true" signature="1934:2210" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -383,8 +382,8 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1508644388684" expanded="true" signature="105:2185" ph="{...}" />
-            <marker date="1508644388684" expanded="true" signature="181:2179" ph="{...}" />
+            <marker date="1508645979436" expanded="true" signature="1934:2204" ph="{...}" />
+            <marker date="1508645979436" expanded="true" signature="1934:2210" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -453,16 +452,16 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <marker date="1508644388684" expanded="true" signature="105:2185" ph="{...}" />
-            <marker date="1508644388684" expanded="true" signature="181:2179" ph="{...}" />
+            <marker date="1508645979436" expanded="true" signature="1934:2204" ph="{...}" />
+            <marker date="1508645979436" expanded="true" signature="1934:2210" ph="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Listener.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="698">
-          <caret line="66" column="1" lean-forward="true" selection-start-line="66" selection-start-column="1" selection-end-line="66" selection-end-column="1" />
+        <state relative-caret-position="209">
+          <caret line="11" column="77" lean-forward="false" selection-start-line="11" selection-start-column="77" selection-end-line="11" selection-end-column="77" />
           <folding />
         </state>
       </provider>

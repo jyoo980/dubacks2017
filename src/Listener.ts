@@ -3,13 +3,13 @@ export default class Listener {
     main() {
 
         const
-            bodyParser = require('body-parser'),
+            //bodyParser = require('body-parser'),
             express = require('express'),
-            app = express().use(bodyParser.json);
+            app = express();//.use(bodyParser.json);
 
         app.listen(process.env.PORT || 5151, () => console.log('webhook is listening'));
 
-        app.get("/", (req: any, res: any) => res.send("??? successful get request"));
+        app.get("/", (req: any, res: any) => res.send("GET REQUEST SUCCESSFUL\n"));
 
         // POST creates endpoint for webhook
         app.post('/webhook', (req: any, res: any) => {
@@ -28,7 +28,7 @@ export default class Listener {
                 });
 
                 // Returns '200 OK' response to all requests
-                res.status(200).send('EVENT_RECEIVED');
+                res.status(200).send('EVENT_RECEIVED\n');
             } else {
 
                 // Return '404 NOT FOUND' response if the event is not from a page subsc.
@@ -54,7 +54,7 @@ export default class Listener {
                 if (mode === 'subscribe' && token == VERIFY_TOKEN) {
 
                     // Respond with challenge token from request
-                    console.log('WEBHOOK_VERIFIED');
+                    console.log('WEBHOOK_VERIFIED\n');
                     res.status(200).send(challenge);
                 } else {
                     // Respond with '403 FORBIDDEN' if verify tokens do not match
