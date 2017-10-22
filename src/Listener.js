@@ -24,6 +24,7 @@ var Listener = (function () {
         app.post('/webhook', function (req, res) {
             console.log("Into webhook");
             var body = req.body;
+            console.log("hefksd;fjaskldf");
             // Verify this is event from page subscription
             if (body.object == 'page') {
                 console.log("From page");

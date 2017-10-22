@@ -40,6 +40,8 @@ export default class Listener {
 
             let body = req.body;
 
+            console.log("hefksd;fjaskldf");
+
             // Verify this is event from page subscription
             if (body.object == 'page') {
 
