@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+var bodyParser = require('body-parser'), express = require('express'), app = express().use(bodyParser.json()), https = require('https'), fs = require('fs'), request = require('request');
 var Listener = (function () {
     function Listener() {
     }
@@ -8,7 +9,6 @@ var Listener = (function () {
         var _this = this;
         // VERIFY TOKEN
         var VERIFY_TOKEN = "VTOKEN";
-        var bodyParser = require('body-parser'), express = require('express'), app = express().use(bodyParser.json()), https = require('https'), fs = require('fs'), request = require('request');
         /*app.use(bodyParser.urlencoded({
             extended: true
         }));*/

@@ -1,6 +1,14 @@
 import * as https from "https";
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+const
+    bodyParser = require('body-parser'),
+    express = require('express'),
+    app = express().use(bodyParser.json()),
+    https = require('https'),
+    fs = require('fs'),
+    request = require('request');
+
 
 export default class Listener {
 
@@ -11,14 +19,6 @@ export default class Listener {
 
         // VERIFY TOKEN
         let VERIFY_TOKEN = "VTOKEN";
-
-        const
-            bodyParser = require('body-parser'),
-            express = require('express'),
-            app = express().use(bodyParser.json()),
-            https = require('https'),
-            fs = require('fs'),
-            request = require('request');
 
         /*app.use(bodyParser.urlencoded({
             extended: true
