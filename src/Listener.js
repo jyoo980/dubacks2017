@@ -10,8 +10,8 @@ var Listener = (function () {
         https = require('https'), fs = require('fs');
         var port = process.env.PORT || 443;
         var options = {
-            key: fs.readFileSync("/etc/letsencrypt/keys/0000_key-certbot.pem"),
-            cert: fs.readFileSync('/etc/letsencrypt/live/<your domain>/fullchain.pem')
+            key: fs.readFileSync("/etc/letsencrypt/live/dubbyfoods.ca/privkey.pem"),
+            cert: fs.readFileSync('/etc/letsencrypt/live/dubbyfoods.ca/fullchain.pem')
         };
         https.createServer(options, app).listen(port, function () {
             console.log('webhook is listening');
@@ -25,6 +25,10 @@ var Listener = (function () {
                 // Iterate over entries
                 body.entry.foreach(function (entry) {
                     var webhookEvent = entry.messaging[0];
+                    if (entry.message) {
+                        var conversation = new WelcomeConversation(webhookEvent.sender.id);
+                        conversation.continue(req, res); // need to get a conversation unique to each person
+                    }
                     console.log(webhookEvent);
                 });
                 // Returns '200 OK' response to all requests

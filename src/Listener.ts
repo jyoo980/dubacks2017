@@ -1,4 +1,8 @@
+import * as https from "https";
+
 export default class Listener {
+
+
 
     main() {
 
@@ -13,8 +17,8 @@ export default class Listener {
         let port = process.env.PORT || 443;
 
         let options = {
-            key: fs.readFileSync("/etc/letsencrypt/keys/0000_key-certbot.pem"),
-            cert: fs.readFileSync('/etc/letsencrypt/live/<your domain>/fullchain.pem')
+            key: fs.readFileSync("/etc/letsencrypt/live/dubbyfoods.ca/privkey.pem"),
+            cert: fs.readFileSync('/etc/letsencrypt/live/dubbyfoods.ca/fullchain.pem')
         };
 
         https.createServer(options, app).listen(port, function() {
@@ -36,6 +40,12 @@ export default class Listener {
                 body.entry.foreach(function (entry: any) {
 
                     let webhookEvent = entry.messaging[0];
+
+                    if (entry.message) {
+                        let conversation : Conversation = new WelcomeConversation(webhookEvent.sender.id);
+                        conversation.continue(req, res); // need to get a conversation unique to each person
+                    }
+
                     console.log(webhookEvent);
                 });
 
@@ -47,7 +57,9 @@ export default class Listener {
                 res.sendStatus(404);
             }
 
+
         });
+
 
         // GET request support with code below
         app.get('/webhook', (req: any, res: any) => {
