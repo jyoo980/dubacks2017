@@ -42,8 +42,9 @@ export default class Listener {
                     let webhookEvent = entry.messaging[0];
 
                     if (entry.message) {
-                        let conversation : Conversation = new WelcomeConversation(webhookEvent.sender.id);
-                        conversation.continue(req, res); // need to get a conversation unique to each person
+                     //   let conversation : Conversation = new WelcomeConversation(webhookEvent.sender.id);
+                     //   conversation.continue(req, res); // need to get a conversation unique to each person
+                        res.status(200).send(entry.message);
                     }
 
                     console.log(webhookEvent);
