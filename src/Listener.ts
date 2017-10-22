@@ -17,7 +17,8 @@ export default class Listener {
             express = require('express'),
             app = express().use(bodyParser.json()),
             https = require('https'),
-            fs = require('fs');
+            fs = require('fs'),
+            request = require('request');
 
         /*app.use(bodyParser.urlencoded({
             extended: true
@@ -53,7 +54,7 @@ export default class Listener {
                 let result = res.status(200);
 
                 // Iterate over entries
-                body.entry.forEach(function (entry: any) {
+                body.entry.forEach((entry: any) => {
 
                     let webhookEvent = entry.messaging[0];
                     console.log(webhookEvent);
@@ -64,7 +65,7 @@ export default class Listener {
                      //   conversation.continue(req, res); // need to get a conversation unique to each person
 
                         console.log("Going to send response");
-                        result.send(webhookEvent.message.text);
+                        this.sendResponse(webhookEvent.sender.id, webhookEvent.message.text);
                         return;
                     }
 
@@ -72,7 +73,7 @@ export default class Listener {
                 });
 
                 // Returns '200 OK' response to all requests
-       //         result.send('EVENT_RECEIVED\n');
+                result.send('EVENT_RECEIVED\n');
             } else {
 
                 // Return '404 NOT FOUND' response if the event is not from a page subsc.
@@ -107,6 +108,32 @@ export default class Listener {
                 }
             }
         });
+    }
+
+    sendResponse(psid : string, response : string) {
+            // Construct the message body
+            let request_body = {
+                "recipient": {
+                    "id": psid
+                },
+                "message": response
+            };
+
+            // Send the HTTP request to the Messenger Platform
+            request({
+                "uri": "https://graph.facebook.com/v2.6/me/messages",
+                "qs": { "access_token": PAGE_ACCESS_TOKEN },
+                "method": "POST",
+                "json": request_body
+            }, (err : any, res : any, body : any) => {
+                if (!err) {
+                    console.log('message sent!')
+                } else {
+                    console.error("Unable to send message:" + err);
+                }
+            });
+        }
+
     }
 
 }

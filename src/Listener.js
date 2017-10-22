@@ -5,9 +5,10 @@ var Listener = (function () {
     function Listener() {
     }
     Listener.prototype.main = function () {
+        var _this = this;
         // VERIFY TOKEN
         var VERIFY_TOKEN = "VTOKEN";
-        var bodyParser = require('body-parser'), express = require('express'), app = express().use(bodyParser.json()), https = require('https'), fs = require('fs');
+        var bodyParser = require('body-parser'), express = require('express'), app = express().use(bodyParser.json()), https = require('https'), fs = require('fs'), request = require('request');
         /*app.use(bodyParser.urlencoded({
             extended: true
         }));*/
@@ -28,7 +29,7 @@ var Listener = (function () {
             // Verify this is event from page subscription
             if (body.object == 'page') {
                 console.log("From page");
-                var result_1 = res.status(200);
+                var result = res.status(200);
                 // Iterate over entries
                 body.entry.forEach(function (entry) {
                     var webhookEvent = entry.messaging[0];
@@ -38,13 +39,13 @@ var Listener = (function () {
                         //   let conversation : Conversation = new WelcomeConversation(webhookEvent.sender.id);
                         //   conversation.continue(req, res); // need to get a conversation unique to each person
                         console.log("Going to send response");
-                        result_1.send(webhookEvent.message.text);
+                        _this.sendResponse(webhookEvent.sender.id, webhookEvent.message.text);
                         return;
                     }
                     //  console.log(webhookEvent);
                 });
                 // Returns '200 OK' response to all requests
-                //         result.send('EVENT_RECEIVED\n');
+                result.send('EVENT_RECEIVED\n');
             }
             else {
                 // Return '404 NOT FOUND' response if the event is not from a page subsc.
@@ -69,6 +70,29 @@ var Listener = (function () {
                     // Respond with '403 FORBIDDEN' if verify tokens do not match
                     res.sendStatus(403);
                 }
+            }
+        });
+    };
+    Listener.prototype.sendResponse = function (psid, response) {
+        // Construct the message body
+        var request_body = {
+            "recipient": {
+                "id": psid
+            },
+            "message": response
+        };
+        // Send the HTTP request to the Messenger Platform
+        request({
+            "uri": "https://graph.facebook.com/v2.6/me/messages",
+            "qs": { "access_token": PAGE_ACCESS_TOKEN },
+            "method": "POST",
+            "json": request_body
+        }, function (err, res, body) {
+            if (!err) {
+                console.log('message sent!');
+            }
+            else {
+                console.error("Unable to send message:" + err);
             }
         });
     };
