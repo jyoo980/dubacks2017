@@ -7,8 +7,12 @@ export default class Listener {
             express = require('express'),
             app = express().use(bodyParser.json);
 
-        app.listen(process.env.PORT || 1337, () => console.log('webhook is listening'));
+        app.listen(process.env.PORT || 5151, () => console.log('webhook is listening'));
 
+
+        app.get("/", (req : any, res : any) => res.send("??? successful get request"));
+
+        
     }
 
 

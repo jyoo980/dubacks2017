@@ -5,7 +5,8 @@ var Listener = (function () {
     }
     Listener.prototype.main = function () {
         var bodyParser = require('body-parser'), express = require('express'), app = express().use(bodyParser.json);
-        app.listen(process.env.PORT || 1337, function () { return console.log('webhook is listening'); });
+        app.listen(process.env.PORT || 5151, function () { return console.log('webhook is listening'); });
+        app.get("/", function (req, res) { return res.send("??? successful get request"); });
     };
     return Listener;
 }());
