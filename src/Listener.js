@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+var PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN || "EAAVRCYBeJgwBAD27bGm7xA4B7pBjfqzy7E9KqthUqJUD5lZAdXPCGYZBiWHk9sznZCHSEmXFYSWc6DNyZAfjKGeKZAED4bbt1g42hER6RMV9QDfdqOvdLQVJiK21Mymm3J7jIZCWfPLoOZCX48SHIgfWP5Yp7R7JaLqOZAwPWBxgCQZDZD";
 var bodyParser = require('body-parser'), express = require('express'), app = express().use(bodyParser.json()), https = require('https'), fs = require('fs'), request = require('request');
 var Listener = (function () {
     function Listener() {
@@ -81,6 +81,7 @@ var Listener = (function () {
             },
             "message": response
         };
+        console.log(request_body);
         // Send the HTTP request to the Messenger Platform
         request({
             "uri": "https://graph.facebook.com/v2.6/me/messages",
