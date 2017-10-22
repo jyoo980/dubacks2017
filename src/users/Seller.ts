@@ -11,6 +11,7 @@ class Seller extends User {
     constructor(name : string) {
         super(name, true, false);
     }
-    
+
+
 
 }
