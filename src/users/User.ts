@@ -22,5 +22,4 @@ abstract class User {
     lookingToBuy() { return this.isBuying; }
 
 
-
 }
