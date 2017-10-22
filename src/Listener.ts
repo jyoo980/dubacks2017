@@ -72,7 +72,7 @@ export default class Listener {
                 });
 
                 // Returns '200 OK' response to all requests
-                result.send('EVENT_RECEIVED\n');
+       //         result.send('EVENT_RECEIVED\n');
             } else {
 
                 // Return '404 NOT FOUND' response if the event is not from a page subsc.
