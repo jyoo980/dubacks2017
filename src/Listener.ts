@@ -1,5 +1,7 @@
 import * as https from "https";
 
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+
 export default class Listener {
 
 

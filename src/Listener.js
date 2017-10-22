@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
 var Listener = (function () {
     function Listener() {
     }
