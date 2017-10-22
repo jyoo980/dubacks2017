@@ -5,9 +5,21 @@ export default class Listener {
         const
             //bodyParser = require('body-parser'),
             express = require('express'),
-            app = express();//.use(bodyParser.json);
+            app = express(),//.use(bodyParser.json);
+            https = require('https'),
+            fs = require('fs');
 
-        app.listen(process.env.PORT || 5151, () => console.log('webhook is listening'));
+
+        let port = process.env.PORT || 443;
+
+        let options = {
+            key: fs.readFileSync("/etc/letsencrypt/keys/0000_key-certbot.pem"),
+            cert: fs.readFileSync('/etc/letsencrypt/live/<your domain>/fullchain.pem')
+        };
+
+        https.createServer(options, app).listen(port, function() {
+            console.log('webhook is listening');
+        });
 
         app.get("/", (req: any, res: any) => res.send("GET REQUEST SUCCESSFUL\n"));
 

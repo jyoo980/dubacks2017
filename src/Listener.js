@@ -6,8 +6,16 @@ var Listener = (function () {
     Listener.prototype.main = function () {
         var 
         //bodyParser = require('body-parser'),
-        express = require('express'), app = express(); //.use(bodyParser.json);
-        app.listen(process.env.PORT || 5151, function () { return console.log('webhook is listening'); });
+        express = require('express'), app = express(), //.use(bodyParser.json);
+        https = require('https'), fs = require('fs');
+        var port = process.env.PORT || 443;
+        var options = {
+            key: fs.readFileSync("/etc/letsencrypt/keys/0000_key-certbot.pem"),
+            cert: fs.readFileSync('/etc/letsencrypt/live/<your domain>/fullchain.pem')
+        };
+        https.createServer(options, app).listen(port, function () {
+            console.log('webhook is listening');
+        });
         app.get("/", function (req, res) { return res.send("GET REQUEST SUCCESSFUL\n"); });
         // POST creates endpoint for webhook
         app.post('/webhook', function (req, res) {
