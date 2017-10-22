@@ -13,9 +13,9 @@ export default class Listener {
         let VERIFY_TOKEN = "VTOKEN";
 
         const
-            //bodyParser = require('body-parser'),
+            bodyParser = require('body-parser'),
             express = require('express'),
-            app = express(),//.use(bodyParser.json);
+            app = express().use(bodyParser.json),
             https = require('https'),
             fs = require('fs');
 

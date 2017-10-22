@@ -7,10 +7,7 @@ var Listener = (function () {
     Listener.prototype.main = function () {
         // VERIFY TOKEN
         var VERIFY_TOKEN = "VTOKEN";
-        var 
-        //bodyParser = require('body-parser'),
-        express = require('express'), app = express(), //.use(bodyParser.json);
-        https = require('https'), fs = require('fs');
+        var bodyParser = require('body-parser'), express = require('express'), app = express().use(bodyParser.json), https = require('https'), fs = require('fs');
         var port = process.env.PORT || 443;
         var options = {
             key: fs.readFileSync("/etc/letsencrypt/live/dubbyfoods.ca/privkey.pem"),
