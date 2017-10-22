@@ -50,6 +50,8 @@ export default class Listener {
 
                 console.log("From page");
 
+                let result = res.status(200);
+
                 // Iterate over entries
                 body.entry.forEach(function (entry: any) {
 
@@ -62,7 +64,7 @@ export default class Listener {
                      //   conversation.continue(req, res); // need to get a conversation unique to each person
 
                         console.log("Going to send response");
-                        res.status(200).send(webhookEvent.message.text);
+                        result.send(webhookEvent.message.text);
                         return;
                     }
 
@@ -70,7 +72,7 @@ export default class Listener {
                 });
 
                 // Returns '200 OK' response to all requests
-                res.status(200).send('EVENT_RECEIVED\n');
+                result.send('EVENT_RECEIVED\n');
             } else {
 
                 // Return '404 NOT FOUND' response if the event is not from a page subsc.

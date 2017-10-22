@@ -28,6 +28,7 @@ var Listener = (function () {
             // Verify this is event from page subscription
             if (body.object == 'page') {
                 console.log("From page");
+                var result_1 = res.status(200);
                 // Iterate over entries
                 body.entry.forEach(function (entry) {
                     var webhookEvent = entry.messaging[0];
@@ -37,13 +38,13 @@ var Listener = (function () {
                         //   let conversation : Conversation = new WelcomeConversation(webhookEvent.sender.id);
                         //   conversation.continue(req, res); // need to get a conversation unique to each person
                         console.log("Going to send response");
-                        res.status(200).send(webhookEvent.message.text);
+                        result_1.send(webhookEvent.message.text);
                         return;
                     }
                     //  console.log(webhookEvent);
                 });
                 // Returns '200 OK' response to all requests
-                res.status(200).send('EVENT_RECEIVED\n');
+                result_1.send('EVENT_RECEIVED\n');
             }
             else {
                 // Return '404 NOT FOUND' response if the event is not from a page subsc.
