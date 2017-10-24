@@ -15,6 +15,9 @@ export class ConversationInterceptor {
         }
     }
 
+    resetCurrentString(newString : string) {
+        this.currentResponse = newString;
+    }
 
     shouldReset() {
         return this.isStringEqualTo("reset")
