@@ -2,6 +2,7 @@
 node_modules/
 .idea/*
 
-#transpiled js
+#transpiled js - can also git rm */\*.js
 **/*.js
+**/*.js.map
 
