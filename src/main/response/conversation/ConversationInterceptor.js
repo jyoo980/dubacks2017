@@ -1,5 +1,6 @@
 "use strict";
-class RequestProcessor {
+Object.defineProperty(exports, "__esModule", { value: true });
+class ConversationInterceptor {
     handle(response, toUser) {
         this.currentResponse = response;
         if (this.shouldReset()) {
@@ -38,3 +39,4 @@ class RequestProcessor {
         console.log("Not yet implemented");
     }
 }
+exports.ConversationInterceptor = ConversationInterceptor;

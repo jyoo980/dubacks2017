@@ -1,4 +1,4 @@
-class RequestProcessor {
+export class ConversationInterceptor {
 
     psid : number;
     currentResponse : string;

@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": "https://github.com/jyoo980/dubhacks2017",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./src/test/*.spec.ts",
     "build": "tsc",
     "serve": "node index.js"
   },
@@ -19,12 +19,14 @@
     "chai": "^4.1.2",
     "express": "^4.16.2",
     "mocha": "^4.0.1",
-    "restify": "^6.2.3"
+    "restify": "^6.2.3",
+    "ts-node": "^3.3.0"
   },
   "dependencies": {
     "@types/body-parser": "^1.16.5",
     "@types/express": "^4.0.37",
     "@types/request": "^2.0.6",
-    "request": "^2.83.0"
+    "request": "^2.83.0",
+    "typescript": "^2.5.3"
   }
 }
