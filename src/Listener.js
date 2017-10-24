@@ -1,45 +1,42 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN || "EAAVRCYBeJgwBAD27bGm7xA4B7pBjfqzy7E9KqthUqJUD5lZAdXPCGYZBiWHk9sznZCHSEmXFYSWc6DNyZAfjKGeKZAED4bbt1g42hER6RMV9QDfdqOvdLQVJiK21Mymm3J7jIZCWfPLoOZCX48SHIgfWP5Yp7R7JaLqOZAwPWBxgCQZDZD";
-var bodyParser = require('body-parser'), express = require('express'), app = express().use(bodyParser.json()), https = require('https'), fs = require('fs'), request = require('request');
-var Listener = (function () {
-    function Listener() {
-    }
-    Listener.prototype.main = function () {
-        var _this = this;
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN || "EAAVRCYBeJgwBAD27bGm7xA4B7pBjfqzy7E9KqthUqJUD5lZAdXPCGYZBiWHk9sznZCHSEmXFYSWc6DNyZAfjKGeKZAED4bbt1g42hER6RMV9QDfdqOvdLQVJiK21Mymm3J7jIZCWfPLoOZCX48SHIgfWP5Yp7R7JaLqOZAwPWBxgCQZDZD";
+const bodyParser = require('body-parser'), express = require('express'), app = express().use(bodyParser.json()), https = require('https'), fs = require('fs'), request = require('request');
+class Listener {
+    main() {
         // VERIFY TOKEN
-        var VERIFY_TOKEN = "VTOKEN";
+        let VERIFY_TOKEN = "VTOKEN";
         /*app.use(bodyParser.urlencoded({
             extended: true
         }));*/
-        var port = process.env.PORT || 443;
-        var options = {
+        let port = process.env.PORT || 443;
+        let options = {
             key: fs.readFileSync("/etc/letsencrypt/live/dubbyfoods.ca/privkey.pem"),
             cert: fs.readFileSync('/etc/letsencrypt/live/dubbyfoods.ca/fullchain.pem')
         };
         https.createServer(options, app).listen(port, function () {
             console.log('webhook is listening');
         });
-        app.get("/", function (req, res) { return res.send("GET REQUEST SUCCESSFUL\n"); });
+        app.get("/", (req, res) => res.send("GET REQUEST SUCCESSFUL\n"));
         // POST creates endpoint for webhook
-        app.post('/webhook', function (req, res) {
+        app.post('/webhook', (req, res) => {
             console.log("Into webhook");
-            var body = req.body;
+            let body = req.body;
             console.log("hefksd;fjaskldf");
             // Verify this is event from page subscription
             if (body.object == 'page') {
                 console.log("From page");
-                var result = res.status(200);
+                let result = res.status(200);
                 // Iterate over entries
-                body.entry.forEach(function (entry) {
-                    var webhookEvent = entry.messaging[0];
+                body.entry.forEach((entry) => {
+                    let webhookEvent = entry.messaging[0];
                     console.log(webhookEvent);
                     if (webhookEvent.message) {
                         console.log(webhookEvent.message);
-                        //   let conversation : Conversation = new WelcomeConversation(webhookEvent.sender.id);
-                        //   conversation.continue(req, res); // need to get a conversation unique to each person
+                        let conversation = new WelcomeConversation(webhookEvent.sender.id);
+                        //   response.continue(req, res); // need to get a response unique to each person
                         console.log("Going to send response");
-                        _this.sendResponse(webhookEvent.sender.id, { "text": webhookEvent.message.text });
+                        this.sendResponse(webhookEvent.sender.id, { "text": webhookEvent.message.text });
                         return;
                     }
                     //  console.log(webhookEvent);
@@ -54,11 +51,11 @@ var Listener = (function () {
             }
         });
         // GET request support with code below
-        app.get('/webhook', function (req, res) {
+        app.get('/webhook', (req, res) => {
             // Parse query param. for GET
-            var mode = req.query['hub.mode'];
-            var token = req.query['hub.verify_token'];
-            var challenge = req.query['hub.challenge'];
+            let mode = req.query['hub.mode'];
+            let token = req.query['hub.verify_token'];
+            let challenge = req.query['hub.challenge'];
             // Check if both token, mode is in the query string of request
             if (mode && token) {
                 if (mode === 'subscribe' && token == VERIFY_TOKEN) {
@@ -72,10 +69,10 @@ var Listener = (function () {
                 }
             }
         });
-    };
-    Listener.prototype.sendResponse = function (psid, response) {
+    }
+    sendResponse(psid, response) {
         // Construct the message body
-        var request_body = {
+        let request_body = {
             "recipient": {
                 "id": psid
             },
@@ -88,7 +85,7 @@ var Listener = (function () {
             "qs": { "access_token": PAGE_ACCESS_TOKEN },
             "method": "POST",
             "json": request_body
-        }, function (err, res, body) {
+        }, (err, res, body) => {
             if (!err) {
                 console.log('message sent!');
             }
@@ -96,7 +93,6 @@ var Listener = (function () {
                 console.error("Unable to send message:" + err);
             }
         });
-    };
-    return Listener;
-}());
+    }
+}
 exports.default = Listener;

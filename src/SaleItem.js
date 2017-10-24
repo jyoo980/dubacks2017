@@ -1,5 +1,5 @@
 "use strict";
-var SaleItem = (function () {
+class SaleItem {
     /**
      *
      * @param {string} name         : name of the item for sale
@@ -7,16 +7,15 @@ var SaleItem = (function () {
      * @param {string} description  : brief description of item (user provided)
      * @param {string} category     : category of the item for sale
      */
-    function SaleItem(name, price, description, category) {
+    constructor(name, price, description, category) {
         this.name = name;
         this.price = price;
         this.description = description;
         this.category = category;
     }
     // getters
-    SaleItem.prototype.getName = function () { return this.name; };
-    SaleItem.prototype.getPrice = function () { return this.price; };
-    SaleItem.prototype.getDescription = function () { return this.description; };
-    SaleItem.prototype.getCategory = function () { return this.category; };
-    return SaleItem;
-}());
+    getName() { return this.name; }
+    getPrice() { return this.price; }
+    getDescription() { return this.description; }
+    getCategory() { return this.category; }
+}

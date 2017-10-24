@@ -98,12 +98,10 @@ class PreferencesConversation extends Conversation {
         this.valueToReplace = req.body;
         //User.updateValue; // doesn't exist yet
         let result = "Updating " + this.fieldToUpdate + " to " + this.valueToReplace;
-
-
     }
 
     goodbye(req : any, res : any) {
-        // actually should move on to next conversation - maybe hold a conversation object?
+        // actually should move on to next response - maybe hold a response object?
 
         // return a flag to indicate that next function doesn't exist
     }
@@ -122,6 +120,7 @@ class PreferencesConversation extends Conversation {
 
 class WelcomeConversation extends Conversation {
     continue(req: any, res: any): void {
+        this.nextConversation = new PreferencesConversation(this.thisUser);
     }
 
 }
