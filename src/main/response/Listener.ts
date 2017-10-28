@@ -1,4 +1,6 @@
 
+import {ConversationInterceptor} from "./conversation/ConversationInterceptor";
+
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN || "EAAVRCYBeJgwBAD27bGm7xA4B7pBjfqzy7E9KqthUqJUD5lZAdXPCGYZBiWHk9sznZCHSEmXFYSWc6DNyZAfjKGeKZAED4bbt1g42hER6RMV9QDfdqOvdLQVJiK21Mymm3J7jIZCWfPLoOZCX48SHIgfWP5Yp7R7JaLqOZAwPWBxgCQZDZD";
 const
     bodyParser = require('body-parser'),
@@ -60,12 +62,14 @@ export default class Listener {
 
                     if (webhookEvent.message) {
                         console.log(webhookEvent.message);
+                        let conversationInterceptor = new ConversationInterceptor(webhookEvent.sender.id);
                         let conversation : Conversation = new WelcomeConversation(webhookEvent.sender.id);
                      //   response.continue(req, res); // need to get a response unique to each person
 
+                        conversationInterceptor.handle("report","sfhdjfhas");
                         console.log("Going to send response");
-                        this.sendResponse(webhookEvent.sender.id,
-                            {"text": webhookEvent.message.text});
+                        //this.sendResponse(webhookEvent.sender.id,
+                          //  {"text": webhookEvent.message.text});
                         return;
                     }
 

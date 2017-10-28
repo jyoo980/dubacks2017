@@ -6,13 +6,13 @@ import {ConversationInterceptor} from "./ConversationInterceptor";
 
 
 let FINAL_ID = "8473241";
-let responseHandler = new ResponseHandler();
+let responseHandler = new ResponseHandler(FINAL_ID);
 let conversationInterceptor : ConversationInterceptor;
 
 describe("", function() {
 
     before("", function() {
-        conversationInterceptor = new ConversationInterceptor();
+     //   conversationInterceptor = new ConversationInterceptor();
     });
 
 

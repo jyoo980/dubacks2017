@@ -1,8 +1,12 @@
 export class ConversationInterceptor {
 
-    psid : number;
+    psid : string;
     currentResponse : string;
     currentConversation : Conversation;
+
+    constructor(psid : string) {
+        this.psid = psid;
+    }
 
     handle(response : string, toUser : any) {
         this.currentResponse = response;
