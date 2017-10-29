@@ -1,10 +1,11 @@
 import ResponseHandler from "../ResponseHandler";
+import ConversationSpawner from "./Conversation";
 
 export class ConversationInterceptor {
 
     psid : string;
     currentResponse : string;
-    currentConversation : Conversation;
+    currentConversation : ConversationSpawner;
 
     constructor(psid : string) {
         this.psid = psid;
@@ -17,7 +18,7 @@ export class ConversationInterceptor {
         } else if (this.shouldReport()) {
             this.interceptReport();
         } else {
-            this.continueConversation(toUser);
+            this.currentConversation.continueConversation(this.currentResponse);
         }
     }
 
@@ -44,12 +45,6 @@ export class ConversationInterceptor {
 
     private interceptReport() {
         console.log("Not yet implemented")
-    }
-
-    private continueConversation(toUser : any) {
-        while (this.currentConversation.hasNext) {
-            this.currentConversation.continue(this.currentResponse);
-        }
     }
 
     private interceptReset() {

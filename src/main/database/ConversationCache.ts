@@ -1,3 +1,4 @@
+const NodeCache = require("node-cache");
 import {ConversationInterceptor} from "../response/conversation/ConversationInterceptor";
 
 export default class ConversationCache {

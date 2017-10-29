@@ -1,11 +1,11 @@
 
 import ResponseHandler from "../ResponseHandler";
 
-class ConversationSpawner {
+export default class ConversationSpawner {
 
     currentConversation : Conversation;
 
-    continueConversation(req : any, res : any) {
+    continueConversation(req : any) {
         if (this.currentConversation.hasNext()) {
             this.currentConversation.continue(req);
         }
@@ -21,7 +21,7 @@ class ConversationSpawner {
 
 
 
-abstract class Conversation {
+export abstract class Conversation {
 
     responseSender : ResponseHandler;
     thisUser : string;
@@ -40,7 +40,7 @@ abstract class Conversation {
     abstract continue(req : any) : void;
 }
 
-class PreferencesConversation extends Conversation {
+export class PreferencesConversation extends Conversation {
 
     fieldToUpdate : string = "";
     valueToReplace : string = "";
@@ -125,7 +125,7 @@ class PreferencesConversation extends Conversation {
 }
 
 
-class WelcomeConversation extends Conversation {
+export class WelcomeConversation extends Conversation {
     continue(req: any): void {
         this.nextConversation = new PreferencesConversation(this.thisUser);
         this.responseSender.sendResponse("Hello!");
@@ -137,7 +137,7 @@ class WelcomeConversation extends Conversation {
 
 }
 
-class WaitingConversation extends Conversation {
+export class WaitingConversation extends Conversation {
     //hasnext should be like a waiting or something
 
     nextConversation = new WelcomeConversation(this.thisUser);
