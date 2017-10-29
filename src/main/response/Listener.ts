@@ -1,5 +1,6 @@
 
 import {ConversationInterceptor} from "./conversation/ConversationInterceptor";
+import ConversationCache from "../database/ConversationCache";
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN || "EAAVRCYBeJgwBAD27bGm7xA4B7pBjfqzy7E9KqthUqJUD5lZAdXPCGYZBiWHk9sznZCHSEmXFYSWc6DNyZAfjKGeKZAED4bbt1g42hER6RMV9QDfdqOvdLQVJiK21Mymm3J7jIZCWfPLoOZCX48SHIgfWP5Yp7R7JaLqOZAwPWBxgCQZDZD";
 const
@@ -41,11 +42,7 @@ export default class Listener {
         // POST creates endpoint for webhook
         app.post('/webhook', (req: any, res: any) => {
 
-            console.log("Into webhook");
-
             let body = req.body;
-
-            console.log("hefksd;fjaskldf");
 
             // Verify this is event from page subscription
             if (body.object == 'page') {
@@ -55,26 +52,7 @@ export default class Listener {
                 let result = res.status(200);
 
                 // Iterate over entries
-                body.entry.forEach((entry: any) => {
-
-                    let webhookEvent = entry.messaging[0];
-                    console.log(webhookEvent);
-
-                    if (webhookEvent.message) {
-                        console.log(webhookEvent.message);
-                        let conversationInterceptor = new ConversationInterceptor(webhookEvent.sender.id);
-                        let conversation : Conversation = new WelcomeConversation(webhookEvent.sender.id);
-                     //   response.continue(req, res); // need to get a response unique to each person
-
-                        conversationInterceptor.handle("report","sfhdjfhas");
-                        console.log("Going to send response");
-                        //this.sendResponse(webhookEvent.sender.id,
-                          //  {"text": webhookEvent.message.text});
-                        return;
-                    }
-
-                  //  console.log(webhookEvent);
-                });
+                this.processNormalMessage(res, body);
 
                 // Returns '200 OK' response to all requests
                 result.send('EVENT_RECEIVED\n');
@@ -139,5 +117,42 @@ export default class Listener {
                 }
             });
         }
+
+        processNormalMessage(res : any, body : any) {
+            body.entry.forEach((entry: any) => {
+
+                let webhookEvent = entry.messaging[0];
+                console.log(webhookEvent);
+
+                if (webhookEvent.message) {
+                    console.log(webhookEvent.message);
+
+                    let psid = webhookEvent.sender.id;
+                    let handler = ConversationCache.getConversation(psid);
+                    if (handler != undefined) {
+                        handler.handle(webhookEvent.message, "");
+                    }
+
+                   /* let conversationInterceptor = new ConversationInterceptor(webhookEvent.sender.id);
+                    let conversation : Conversation = new WelcomeConversation(webhookEvent.sender.id);
+                    //   response.continue(req, res); // need to get a response unique to each person
+
+                    conversationInterceptor.handle("report","sfhdjfhas");
+                    console.log("Going to send response");
+*/
+
+
+                    //this.sendResponse(webhookEvent.sender.id,
+                    //  {"text": webhookEvent.message.text});
+                    return;
+                }
+
+                //  console.log(webhookEvent);
+            });
+
+            // Returns '200 OK' response to all requests
+            res.send('EVENT_RECEIVED\n');
+}
+
 
     }

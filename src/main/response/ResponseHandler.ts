@@ -12,7 +12,6 @@ class ResponseHandler {
         this.psid = id;
     }
 
-    // for now the data cache will be stored in here
     sendResponse(response : any) {
         // Construct the message body
         let request_body = {
@@ -40,32 +39,6 @@ class ResponseHandler {
         });
     }
 
-
-
-}
-
-class DataCache {
-    static idCache = new NodeCache();
-
-    // cache the id and the response handler unique to each person
-
-    private constructor() {}
-
-    addKey(psid : string, name : string) {
-        DataCache.idCache.set({psid: name}, function(err : any, res : any) {
-            if (res) {
-                console.log("Don't know what went wrong here");
-            }
-        })
-    }
-
-    getName(psid : string) {
-        DataCache.idCache.get()
-    }
-
-    getProfileInformation() {
-
-    }
 
 
 }
