@@ -18,6 +18,7 @@ export class ConversationInterceptor {
         } else if (this.shouldReport()) {
             this.interceptReport();
         } else {
+            console.log("Continuing conversation");
             this.currentConversation.continueConversation(this.currentResponse);
         }
     }

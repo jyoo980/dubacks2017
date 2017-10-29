@@ -95,6 +95,7 @@ export default class Listener {
         processNormalMessage(res : any, body : any) {
             body.entry.forEach((entry: any) => {
 
+                console.log("processing message");
                 let webhookEvent = entry.messaging[0];
                 console.log(webhookEvent);
 
@@ -104,6 +105,7 @@ export default class Listener {
                     let psid = webhookEvent.sender.id;
                     let handler = ConversationCache.getConversation(psid);
                     if (handler != undefined) {
+                        console.log("sending response");
                         handler.handle(webhookEvent.message, "");
                     }
 
