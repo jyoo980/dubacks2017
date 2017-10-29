@@ -20,10 +20,12 @@ export default class ConversationCache {
 
     static getConversation(psid : string) {
         try {
+            console.log("Trying to get a conversation for cus");
             ConversationCache.idCache.get(psid);
         } catch (err) {
             if (err) {
                 // do something... lol
+                console.log("Something bad happened in getConversation");
             }
             return this.addKey(psid);
         }
