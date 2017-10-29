@@ -1,3 +1,5 @@
+import ResponseHandler from "../ResponseHandler";
+
 export class ConversationInterceptor {
 
     psid : string;
@@ -46,9 +48,8 @@ export class ConversationInterceptor {
 
     private continueConversation(toUser : any) {
         while (this.currentConversation.hasNext) {
-            this.currentConversation.continue(this.currentResponse, toUser);
+            this.currentConversation.continue(this.currentResponse);
         }
-
     }
 
     private interceptReset() {

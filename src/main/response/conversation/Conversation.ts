@@ -1,16 +1,18 @@
 
+import ResponseHandler from "../ResponseHandler";
+
 class ConversationSpawner {
 
     currentConversation : Conversation;
 
     continueConversation(req : any, res : any) {
         if (this.currentConversation.hasNext()) {
-            this.currentConversation.continue(req, res);
+            this.currentConversation.continue(req);
         }
 
         else {
             this.currentConversation = this.currentConversation.nextConversation;
-            this.currentConversation.continue(req,res);
+            this.currentConversation.continue(req);
         }
     }
 
@@ -21,19 +23,21 @@ class ConversationSpawner {
 
 abstract class Conversation {
 
+    responseSender : ResponseHandler;
     thisUser : string;
-    nextStep : (req : any, res : any) => void;
+    nextStep : (req : any) => void;
     nextConversation : Conversation;
 
     constructor(psid : string) {
         this.thisUser = psid;
+        this.responseSender = new ResponseHandler(psid);
     }
 
     hasNext() : boolean {
         return (!this.nextStep);
     }
 
-    abstract continue(req : any, res : any) : void;
+    abstract continue(req : any) : void;
 }
 
 class PreferencesConversation extends Conversation {
@@ -47,60 +51,63 @@ class PreferencesConversation extends Conversation {
     }
 
 
-    continue(req : any, res : any) : void {
-        this.nextStep(req, res);
+    continue(req : any) : void {
+        this.nextStep(req);
 
     }
 
-    askInitialQuestion(req : any, res : any) {
+    askInitialQuestion(req : any) {
         let greeting : string = "Would you like to update your preferences?";
         // res, req
 
-        res.status(200).send(greeting);
+        this.responseSender.sendResponse(greeting);
         this.nextStep = this.handleUpdatePreferencesResponse;
     }
 
-    handleUpdatePreferencesResponse(req : any, res : any) {
+    handleUpdatePreferencesResponse(req : any) {
         if (this.cleanString(req.body) === 'no') {
             this.nextStep = this.goodbye;
         } else {
             this.nextStep = this.askWhichFields;
         }
     }
-    askWhichFields(req : any, res : any) {
+    askWhichFields(req : any) {
         let fieldOptions : string = "Would you like to update: name, location?";
-        res.status(200).send(fieldOptions);
+        this.responseSender.sendResponse(fieldOptions);
         this.nextStep = this.handleFieldsResponse;
 
     }
 
-    handleFieldsResponse(req : any, res : any) {
+    handleFieldsResponse(req : any) {
         let response = req.body;
         // really elementary
         let fieldToChange = response;
 
     }
 
-    askWhatValue(req : any, res : any) {
+    askWhatValue(req : any) {
         let prompt = "What would you like to change the value of " + this.fieldToUpdate + " to?";
+        this.responseSender.sendResponse(prompt);
         this.nextStep = this.askResult;
     }
 
 
-    askTryAgain(req : any, res : any) {
+    askTryAgain(req : any) {
         let askAgain : string = "Sorry, I didn't quite catch that. Could you repeat it? Please keep your responses as simple as possible.";
-        res.status(200).send(askAgain);
+        this.responseSender.sendResponse(askAgain);
         this.nextStep = this.askWhichFields;
 
     }
 
-    askResult(req : any, res : any) {
+    askResult(req : any) {
         this.valueToReplace = req.body;
         //User.updateValue; // doesn't exist yet
         let result = "Updating " + this.fieldToUpdate + " to " + this.valueToReplace;
+        this.responseSender.sendResponse(result);
+        // actually change it now
     }
 
-    goodbye(req : any, res : any) {
+    goodbye(req : any) {
         // actually should move on to next response - maybe hold a response object?
 
         // return a flag to indicate that next function doesn't exist
@@ -119,8 +126,13 @@ class PreferencesConversation extends Conversation {
 
 
 class WelcomeConversation extends Conversation {
-    continue(req: any, res: any): void {
+    continue(req: any): void {
         this.nextConversation = new PreferencesConversation(this.thisUser);
+        this.responseSender.sendResponse("Hello!");
+    }
+
+    hasNext() {
+        return true;
     }
 
 }
@@ -130,7 +142,7 @@ class WaitingConversation extends Conversation {
 
     nextConversation = new WelcomeConversation(this.thisUser);
 
-    continue(req: any, res: any): void {
+    continue(req: any): void {
 
     }
 

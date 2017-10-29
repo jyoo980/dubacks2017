@@ -2,6 +2,7 @@
 //import "mocha";
 import {expect} from "chai";
 import {ConversationInterceptor} from "./ConversationInterceptor";
+import ResponseHandler from "../ResponseHandler";
 // from '../src/main/response/conversation/ConversationInterceptor.ts';
 
 
