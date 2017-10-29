@@ -22,6 +22,7 @@ export default class ConversationCache {
         try {
             console.log("Trying to get a conversation for cus");
             ConversationCache.idCache.get(psid);
+            console.log("Nope, you got a conversation for " + psid);
         } catch (err) {
             if (err) {
                 // do something... lol
