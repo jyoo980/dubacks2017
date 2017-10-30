@@ -27,14 +27,12 @@ export default class ConversationCache {
     static getConversation(psid : string) : Promise<ConversationInterceptor> {
         let that = this;
         return new Promise(function (fulfill, reject) {
-            try {
                 console.log("Trying to get a conversation for cus");
-                fulfill(ConversationCache.idCache.get(psid));
-            } catch (err) {
-                if (err) {
-                    // do something... lol
-                    console.log("Something bad happened in getConversation");
+                let response = ConversationCache.idCache.get(psid);
+                if (response != undefined) {
+                    fulfill(response);
                 }
+
                 that.addKey(psid).then(function (res: any) {
                     console.log("added convo");
                     fulfill(res);
@@ -43,7 +41,6 @@ export default class ConversationCache {
                     console.log("Wtf is happening");
                     fulfill(new ConversationInterceptor(psid));
                 });
-            }
         });
     }
 }
