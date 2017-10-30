@@ -8,14 +8,19 @@ export default class ConversationCache {
 
     private constructor() {}
 
-    static addKey(psid : string) : ConversationInterceptor { // synchronization
-        let conversationHandler = new ConversationInterceptor(psid);
-        ConversationCache.idCache.set({psid: conversationHandler}, function(err : any, res : any) {
-            if (err) {
-                console.log(err);
-            }
+    static addKey(psid : string) : Promise<ConversationInterceptor> { // synchronization
+        return new Promise(function (fulfill, reject) {
+            let conversationHandler = new ConversationInterceptor(psid);
+
+            ConversationCache.idCache.set({psid: conversationHandler}, function (err: any, res: any) {
+                if (err) {
+                    console.log(err);
+                    reject(err);
+                }
+                fulfill(conversationHandler);
+            });
         });
-        return conversationHandler; // doesn't need to be async, but I guess I could refactor with promises if necessary
+         // doesn't need to be async, but I guess I could refactor with promises if necessary
     }
 
     static getConversation(psid : string) {
@@ -28,7 +33,12 @@ export default class ConversationCache {
                 // do something... lol
                 console.log("Something bad happened in getConversation");
             }
-            return this.addKey(psid);
+            this.addKey(psid).then(function (res: any) {
+                return res;
+            }).catch(function(err) {
+                throw new Error("sdfkd");
+            });
+
         }
     }
 }
