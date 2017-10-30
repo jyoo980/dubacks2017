@@ -24,24 +24,26 @@ export default class ConversationCache {
          // doesn't need to be async, but I guess I could refactor with promises if necessary
     }
 
-    static getConversation(psid : string) {
-        try {
-            console.log("Trying to get a conversation for cus");
-            return ConversationCache.idCache.get(psid);
-        } catch (err) {
-            if (err) {
-                // do something... lol
-                console.log("Something bad happened in getConversation");
+    static getConversation(psid : string) : Promise<ConversationInterceptor> {
+        let that = this;
+        return new Promise(function (fulfill, reject) {
+            try {
+                console.log("Trying to get a conversation for cus");
+                fulfill(ConversationCache.idCache.get(psid));
+            } catch (err) {
+                if (err) {
+                    // do something... lol
+                    console.log("Something bad happened in getConversation");
+                }
+                that.addKey(psid).then(function (res: any) {
+                    console.log("added convo");
+                    fulfill(res);
+                }).catch(function (err) {
+                    console.log(err);
+                    console.log("Wtf is happening");
+                    fulfill(new ConversationInterceptor(psid));
+                });
             }
-            this.addKey(psid).then(function (res: any) {
-                console.log("added convo");
-                return res;
-            }).catch(function(err) {
-                console.log(err);
-                console.log("Wtf is happening");
-                return new ConversationInterceptor(psid);
-            });
-
-        }
+        });
     }
 }

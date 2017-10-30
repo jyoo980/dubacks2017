@@ -104,13 +104,14 @@ export default class Listener {
 
                     let psid = webhookEvent.sender.id;
                     console.log("before getting a conversation");
-                    let handler = ConversationCache.getConversation(psid);
-                    if (handler != undefined) {
-                        console.log("sending response");
-                        handler.handle(webhookEvent.message, "");
-                    } else {
-                        console.log("For some reason, handler is undefined");
-                    }
+                    ConversationCache.getConversation(psid).then(function (handler : ConversationInterceptor) {
+                        if (handler != undefined) {
+                            console.log("sending response");
+                            handler.handle(webhookEvent.message, "");
+                        } else {
+                            console.log("For some reason, handler is undefined");
+                        }
+                    });
 
                    /* let conversationInterceptor = new ConversationInterceptor(webhookEvent.sender.id);
                     let conversation : Conversation = new WelcomeConversation(webhookEvent.sender.id);
