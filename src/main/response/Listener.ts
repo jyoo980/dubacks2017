@@ -105,7 +105,6 @@ export default class Listener {
                     let psid = webhookEvent.sender.id;
                     console.log("before getting a conversation");
                     let handler = ConversationCache.getConversation(psid);
-                    console.log("handler is" + handler);
                     if (handler != undefined) {
                         console.log("sending response");
                         handler.handle(webhookEvent.message, "");
