@@ -107,7 +107,7 @@ export default class Listener {
                     ConversationCache.getConversation(psid).then(function (handler : ConversationInterceptor) {
                         if (handler != undefined) {
                             console.log("sending response");
-                            handler.handle(webhookEvent.message);
+                            handler.handle(webhookEvent.message.text);
                         } else {
                             console.log("For some reason, handler is undefined");
                         }
