@@ -12,7 +12,7 @@ export default class ConversationCache {
         return new Promise(function (fulfill, reject) {
             let conversationHandler = new ConversationInterceptor(psid);
 
-            ConversationCache.idCache.set({"psid": conversationHandler}, function (err: any, res: any) {
+            ConversationCache.idCache.set(psid, conversationHandler, function (err: any, res: any) {
                 if (err) {
                     console.log(err);
                     reject(err);
