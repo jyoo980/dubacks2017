@@ -14,6 +14,7 @@ export class ConversationInterceptor {
     handle(response : string) {
         console.log("ready to handle");
         this.currentResponse = response;
+        console.log("put out this response" + this.currentConversation);
         if (this.shouldReset()) {
             console.log("Should reset");
             this.interceptReset();
