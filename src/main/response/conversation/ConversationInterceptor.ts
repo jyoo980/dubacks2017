@@ -11,11 +11,14 @@ export class ConversationInterceptor {
         this.psid = psid;
     }
 
-    handle(response : string, toUser : any) {
+    handle(response : string) {
+        console.log("ready to handle");
         this.currentResponse = response;
         if (this.shouldReset()) {
+            console.log("Should reset");
             this.interceptReset();
         } else if (this.shouldReport()) {
+            console.log("Should report");
             this.interceptReport();
         } else {
             console.log("Continuing conversation");
