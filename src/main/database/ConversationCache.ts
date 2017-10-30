@@ -17,6 +17,7 @@ export default class ConversationCache {
                     console.log(err);
                     reject(err);
                 }
+                console.log("We got to adding the convohandler to cache, but something is awry");
                 fulfill(conversationHandler);
             });
         });
