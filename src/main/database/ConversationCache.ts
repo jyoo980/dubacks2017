@@ -34,9 +34,11 @@ export default class ConversationCache {
                 console.log("Something bad happened in getConversation");
             }
             this.addKey(psid).then(function (res: any) {
+                console.log("added convo");
                 return res;
             }).catch(function(err) {
                 console.log(err);
+                console.log("Wtf is happening");
                 return new ConversationInterceptor(psid);
             });
 
