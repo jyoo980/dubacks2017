@@ -5,6 +5,10 @@ export default class ConversationSpawner {
 
     currentConversation : Conversation;
 
+    constructor(psid : string) {
+        this.currentConversation = new WelcomeConversation(psid);
+    }
+
     continueConversation(req : any) {
         if (this.currentConversation.hasNext()) {
             this.currentConversation.continue(req);

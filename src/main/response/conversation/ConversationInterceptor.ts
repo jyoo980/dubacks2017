@@ -9,12 +9,13 @@ export class ConversationInterceptor {
 
     constructor(psid : string) {
         this.psid = psid;
+        this.currentConversation = new ConversationSpawner(psid);
     }
 
     handle(response : string) {
         console.log("ready to handle");
         this.currentResponse = response;
-        console.log("put out this response" + this.currentConversation);
+        console.log("put out this response" + this.currentResponse);
         if (this.shouldReset()) {
             console.log("Should reset");
             this.interceptReset();
