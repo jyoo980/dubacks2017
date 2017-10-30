@@ -26,8 +26,7 @@ export default class ConversationCache {
     static getConversation(psid : string) {
         try {
             console.log("Trying to get a conversation for cus");
-            ConversationCache.idCache.get(psid);
-            console.log("Nope, you got a conversation for " + psid);
+            return ConversationCache.idCache.get(psid);
         } catch (err) {
             if (err) {
                 // do something... lol
@@ -36,7 +35,8 @@ export default class ConversationCache {
             this.addKey(psid).then(function (res: any) {
                 return res;
             }).catch(function(err) {
-                throw new Error("sdfkd");
+                console.log(err);
+                return new ConversationInterceptor(psid);
             });
 
         }
