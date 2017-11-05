@@ -12,9 +12,11 @@ export default class ConversationSpawner {
     continueConversation(req : any) {
         if (this.currentConversation.hasNext()) {
             this.currentConversation.continue(req);
+            console.log("Continue with current convo");
         }
 
         else {
+            console.log("New convo");
             this.currentConversation = this.currentConversation.nextConversation;
             this.currentConversation.continue(req);
         }
@@ -52,6 +54,8 @@ export class PreferencesConversation extends Conversation {
 
     constructor(psid : string) {
         super(psid);
+        console.log("New preferences convo");
+        this.nextStep = this.askInitialQuestion;
     }
 
 
