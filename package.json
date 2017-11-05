@@ -6,7 +6,7 @@
   "repository": "https://github.com/jyoo980/dubhacks2017",
   "scripts": {
     "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./src/**/*.spec.ts",
-    "build": "tsc",
+    "build": "babel src -d lib",
     "serve": "node index.js"
   },
   "author": "Amy Zhu, James Xiao, James Yoo",
@@ -15,6 +15,9 @@
     "@types/chai": "^4.0.4",
     "@types/mocha": "^2.2.43",
     "@types/restify": "^5.0.5",
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
     "express": "^4.16.2",
