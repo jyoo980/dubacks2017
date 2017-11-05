@@ -7,6 +7,7 @@ export default class ConversationSpawner {
 
     constructor(psid : string) {
         this.currentConversation = new WelcomeConversation(psid);
+        console.log("made a NEW conversationspawner");
     }
 
     continueConversation(req : any) {
