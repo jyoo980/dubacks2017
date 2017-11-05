@@ -8,7 +8,8 @@
     "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./src/**/*.spec.ts",
     "clean": "rm -rf lib/ src/index.js",
     "build": "./node_modules/.bin/babel src -d lib",
-    "serve": "node lib/index.js"
+    "serve": "node lib/index.js",
+    "start": "npm run clean; tsc; npm run build; sudo npm run serve"
   },
   "author": "Amy Zhu, James Xiao, James Yoo",
   "license": "MIT",

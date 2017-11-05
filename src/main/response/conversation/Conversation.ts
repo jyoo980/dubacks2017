@@ -139,11 +139,12 @@ export class WelcomeConversation extends Conversation {
     constructor(psid : string) {
         super(psid);
         this.doesHaveNext = true;
+
+        this.nextConversation = new PreferencesConversation(this.thisUser);
+        console.log("Setting next conversation");
     }
 
     continue(req: any): void {
-        this.nextConversation = new PreferencesConversation(this.thisUser);
-        console.log("Setting next conversation");
         this.responseSender.sendResponse("Hello!");
         this.doesHaveNext = false;
     }
