@@ -18,7 +18,9 @@ export default class ResponseHandler {
             "recipient": {
                 "id": this.psid
             },
-            "message": response
+            "message": {
+                "text": response
+            }
         };
 
         console.log(request_body);
