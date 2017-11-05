@@ -1,4 +1,4 @@
-import Listener from "./src/main/response/Listener"
+import Listener from "./main/response/Listener"
 
 let listener = new Listener();
 listener.main();

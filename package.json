@@ -6,8 +6,8 @@
   "repository": "https://github.com/jyoo980/dubhacks2017",
   "scripts": {
     "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./src/**/*.spec.ts",
-    "build": "babel src -d lib",
-    "serve": "node index.js"
+    "build": "./node_modules/.bin/babel src -d lib",
+    "serve": "node lib/index.js"
   },
   "author": "Amy Zhu, James Xiao, James Yoo",
   "license": "MIT",
