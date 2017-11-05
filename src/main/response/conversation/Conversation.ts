@@ -134,7 +134,12 @@ export class PreferencesConversation extends Conversation {
 
 
 export class WelcomeConversation extends Conversation {
-    doesHaveNext : boolean = true;
+    doesHaveNext : boolean;
+
+    constructor(psid : string) {
+        super(psid);
+        this.doesHaveNext = true;
+    }
 
     continue(req: any): void {
         this.nextConversation = new PreferencesConversation(this.thisUser);
