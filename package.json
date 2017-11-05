@@ -6,6 +6,7 @@
   "repository": "https://github.com/jyoo980/dubhacks2017",
   "scripts": {
     "test": "./node_modules/.bin/mocha --compilers ts:ts-node/register ./src/**/*.spec.ts",
+    "clean": "rm -rf lib/",
     "build": "./node_modules/.bin/babel src -d lib",
     "serve": "node lib/index.js"
   },
