@@ -37,6 +37,7 @@ export default class ConversationCache {
                 that.addKey(psid).then(function (res: any) {
                     console.log("added convo");
                     fulfill(res);
+                    console.log(JSON.stringify(ConversationCache.idCache));
                 }).catch(function (err) {
                     console.log(err);
                     console.log("Wtf is happening");
