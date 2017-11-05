@@ -1,8 +1,8 @@
-const NodeCache = require("node-cache");
+
 import {ConversationInterceptor} from "../response/conversation/ConversationInterceptor";
 
 export default class ConversationCache {
-    static idCache = new NodeCache();
+    static idCache = require("memory-cache");
 
     // cache the id and the response handler unique to each person
 
@@ -29,7 +29,7 @@ export default class ConversationCache {
         return new Promise(function (fulfill, reject) {
                 console.log("Trying to get a conversation for cus");
                 let response = ConversationCache.idCache.get(psid);
-                if (response != undefined) {
+                if (response != null) {
                     console.log("Old convospawner exists");
                     fulfill(response);
                 }
