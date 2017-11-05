@@ -12,14 +12,14 @@ export default class ConversationCache {
         return new Promise(function (fulfill, reject) {
             let conversationHandler = new ConversationInterceptor(psid);
 
-            ConversationCache.idCache.set(psid, conversationHandler, function (err: any, res: any) {
-                if (err) {
+            ConversationCache.idCache.put(psid, conversationHandler); //function (err: any, res: any) {
+               /* if (err) {
                     console.log(err);
                     reject(err);
                 }
-                console.log("We got to adding the convohandler to cache");
+                console.log("We got to adding the convohandler to cache"); */
                 fulfill(conversationHandler);
-            });
+            //});
         });
          // doesn't need to be async, but I guess I could refactor with promises if necessary
     }
@@ -37,7 +37,7 @@ export default class ConversationCache {
                 that.addKey(psid).then(function (res: any) {
                     console.log("added convo");
                     fulfill(res);
-                    console.log(JSON.stringify(ConversationCache.idCache));
+                    console.log(JSON.stringify(ConversationCache.idCache.keys()));
                 }).catch(function (err) {
                     console.log(err);
                     console.log("Wtf is happening");
