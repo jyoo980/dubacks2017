@@ -30,6 +30,7 @@ export default class ConversationCache {
                 console.log("Trying to get a conversation for cus");
                 let response = ConversationCache.idCache.get(psid);
                 if (response != undefined) {
+                    console.log("Old convospawner exists");
                     fulfill(response);
                 }
 
@@ -39,7 +40,7 @@ export default class ConversationCache {
                 }).catch(function (err) {
                     console.log(err);
                     console.log("Wtf is happening");
-                    fulfill(new ConversationInterceptor(psid));
+                    reject("U SUCK");
                 });
         });
     }
