@@ -132,11 +132,12 @@ export class PreferencesConversation extends Conversation {
 export class WelcomeConversation extends Conversation {
     continue(req: any): void {
         this.nextConversation = new PreferencesConversation(this.thisUser);
+        console.log("Setting next conversation");
         this.responseSender.sendResponse("Hello!");
     }
 
     hasNext() {
-        return true;
+        return false;
     }
 
 }
