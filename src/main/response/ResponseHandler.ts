@@ -32,13 +32,15 @@ export default class ResponseHandler {
         }, (err : any, res : any, body : any) => {
             if (!err) {
                 console.log('message sent!');
+                console.log(res);
+                console.log(body);
             } else {
                 console.error("Unable to send message:" + err);
                 // do more checking
             }
         });
     }
-
+// request-promise-native perhaps
 
 
 }
