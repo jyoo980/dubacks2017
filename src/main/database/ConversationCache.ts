@@ -1,5 +1,6 @@
 const NodeCache = require("node-cache");
 import {ConversationInterceptor} from "../response/conversation/ConversationInterceptor";
+import * as Promise from 'bluebird';
 
 export default class ConversationCache {
     static idCache = new NodeCache();
