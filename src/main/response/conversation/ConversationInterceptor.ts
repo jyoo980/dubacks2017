@@ -1,4 +1,3 @@
-import ResponseHandler from "../ResponseHandler";
 import ConversationSpawner from "./Conversation";
 
 export class ConversationInterceptor {
