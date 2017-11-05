@@ -130,14 +130,17 @@ export class PreferencesConversation extends Conversation {
 
 
 export class WelcomeConversation extends Conversation {
+    doesHaveNext : boolean = true;
+
     continue(req: any): void {
         this.nextConversation = new PreferencesConversation(this.thisUser);
         console.log("Setting next conversation");
         this.responseSender.sendResponse("Hello!");
+        this.doesHaveNext = false;
     }
 
     hasNext() {
-        return false;
+        return this.doesHaveNext;
     }
 
 }
