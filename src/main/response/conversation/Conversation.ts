@@ -18,8 +18,10 @@ export default class ConversationSpawner {
 
         else {
             console.log("New convo");
-            this.currentConversation = this.currentConversation.nextConversation;
-            this.currentConversation.continue(req);
+            if (this.currentConversation.nextConversation != undefined) {
+                this.currentConversation = this.currentConversation.nextConversation;
+                this.currentConversation.continue(req);
+            }
         }
     }
 
@@ -59,6 +61,10 @@ export class PreferencesConversation extends Conversation {
         this.nextStep = this.askInitialQuestion;
     }
 
+    // I do NOT need this! WHERE IS ABSTRACTION
+    hasNext() : boolean {
+        return (this.nextStep != undefined);
+    }
 
     continue(req : any) : void {
         console.log("Continuing prefernces convo");
