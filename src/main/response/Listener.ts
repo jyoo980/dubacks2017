@@ -106,7 +106,7 @@ export default class Listener {
 
                     let psid = webhookEvent.sender.id;
                     console.log("before getting a conversation");
-                    cache.getConversation(psid).then(function (handler : ConversationInterceptor) {
+                    this.cache.getConversation(psid).then(function (handler : ConversationInterceptor) {
                         if (handler != undefined) {
                             console.log("sending response");
                             handler.handle(webhookEvent.message.text);
