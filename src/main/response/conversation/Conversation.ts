@@ -79,7 +79,9 @@ export class PreferencesConversation extends Conversation {
         console.log("In updating");
         if (this.cleanString(req) === 'no') {
             this.nextStep = this.goodbye;
+            console.log("bye");
         } else {
+            console.log("move on");
             this.nextStep = this.askWhichFields;
         }
     }
