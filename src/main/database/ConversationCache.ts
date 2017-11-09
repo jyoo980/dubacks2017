@@ -18,42 +18,26 @@ export default class ConversationCache {
         console.log("Making a new cache, for some reason?");
     }
 
-    addKey(psid : string) : Promise<ConversationInterceptor> { // synchronization
+    addKey(psid : string) : ConversationInterceptor { // synchronization
         let that = this;
-        return new Promise(function (fulfill, reject) {
             let conversationHandler = new ConversationInterceptor(psid);
             console.log("Add key to cache - is this necessary");
-            that.idCache.put(psid, conversationHandler); //function (err: any, res: any) {
-               /* if (err) {
-                    console.log(err);
-                    reject(err);
-                }
-                console.log("We got to adding the convohandler to cache"); */
-                fulfill(conversationHandler);
-            //});
-        });
-         // doesn't need to be async, but I guess I could refactor with promises if necessary
+            that.idCache.put(psid, conversationHandler);
+            return conversationHandler;
     }
 
-    getConversation(psid : string) : Promise<ConversationInterceptor> {
+    getConversation(psid : string) : ConversationInterceptor {
         let that = this;
-        return new Promise(function (fulfill, reject) {
                 console.log("Trying to get a conversation for cus");
                 let response = that.idCache.get(psid);
                 if (response != null) {
                     console.log("Old convospawner exists");
-                    fulfill(response);
+                    return response;
                 }
+                console.log("added convo");
+                console.log(JSON.stringify(that.idCache.keys()));
 
-                that.addKey(psid).then(function (res: any) {
-                    console.log("added convo");
-                    fulfill(res);
-                    console.log(JSON.stringify(that.idCache.keys()));
-                }).catch(function (err) {
-                    console.log(err);
-                    console.log("Wtf is happening");
-                    reject("U SUCK");
-                });
-        });
+                return that.addKey(psid);
+
     }
 }
