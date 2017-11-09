@@ -2,19 +2,28 @@
 import {ConversationInterceptor} from "../response/conversation/ConversationInterceptor";
 
 export default class ConversationCache {
-    static idCache = require("memory-cache");
+    private idCache = require('memory-cache');
+    private static cache : ConversationCache;
 
     // cache the id and the response handler unique to each person
 
-    private constructor() {
-        console.log("Making a new cache, for some reason?")
+    public static getInstance() : ConversationCache {
+        if (this.cache == null) {
+            this.cache = new ConversationCache();
+        }
+        return this.cache;
     }
 
-    static addKey(psid : string) : Promise<ConversationInterceptor> { // synchronization
+    private constructor() {
+        console.log("Making a new cache, for some reason?");
+    }
+
+    addKey(psid : string) : Promise<ConversationInterceptor> { // synchronization
+        let that = this;
         return new Promise(function (fulfill, reject) {
             let conversationHandler = new ConversationInterceptor(psid);
             console.log("Add key to cache - is this necessary");
-            ConversationCache.idCache.put(psid, conversationHandler); //function (err: any, res: any) {
+            that.idCache.put(psid, conversationHandler); //function (err: any, res: any) {
                /* if (err) {
                     console.log(err);
                     reject(err);
@@ -26,11 +35,11 @@ export default class ConversationCache {
          // doesn't need to be async, but I guess I could refactor with promises if necessary
     }
 
-    static getConversation(psid : string) : Promise<ConversationInterceptor> {
+    getConversation(psid : string) : Promise<ConversationInterceptor> {
         let that = this;
         return new Promise(function (fulfill, reject) {
                 console.log("Trying to get a conversation for cus");
-                let response = ConversationCache.idCache.get(psid);
+                let response = that.idCache.get(psid);
                 if (response != null) {
                     console.log("Old convospawner exists");
                     fulfill(response);
@@ -39,7 +48,7 @@ export default class ConversationCache {
                 that.addKey(psid).then(function (res: any) {
                     console.log("added convo");
                     fulfill(res);
-                    console.log(JSON.stringify(ConversationCache.idCache.keys()));
+                    console.log(JSON.stringify(that.idCache.keys()));
                 }).catch(function (err) {
                     console.log(err);
                     console.log("Wtf is happening");

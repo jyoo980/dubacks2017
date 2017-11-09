@@ -9,16 +9,17 @@ const
     app = express().use(bodyParser.json()),
     https = require('https'),
     fs = require('fs'),
-    request = require('request'),
-    cache = require('ConversationCache');
+    request = require('request');
 
 
 export default class Listener {
 
+    cache : ConversationCache;
 
 
     main() {
 
+        this.cache = ConversationCache.getInstance();
 
         // VERIFY TOKEN
         let VERIFY_TOKEN = "VTOKEN";
