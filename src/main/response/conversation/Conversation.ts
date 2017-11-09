@@ -43,7 +43,7 @@ export abstract class Conversation {
     }
 
     hasNext() : boolean {
-        return (!this.nextStep);
+        return (this.nextStep != undefined);
     }
 
     abstract continue(req : any) : void;
@@ -59,11 +59,6 @@ export class PreferencesConversation extends Conversation {
         super(psid);
         console.log("New preferences convo");
         this.nextStep = this.askInitialQuestion;
-    }
-
-    // I do NOT need this! WHERE IS ABSTRACTION
-    hasNext() : boolean {
-        return (this.nextStep != undefined);
     }
 
     continue(req : any) : void {
