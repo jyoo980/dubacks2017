@@ -76,6 +76,7 @@ export class PreferencesConversation extends Conversation {
     }
 
     handleUpdatePreferencesResponse(req : any) {
+        console.log("In updating");
         if (this.cleanString(req) === 'no') {
             this.nextStep = this.goodbye;
         } else {
