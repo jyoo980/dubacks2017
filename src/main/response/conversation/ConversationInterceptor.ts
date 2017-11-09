@@ -9,6 +9,7 @@ export class ConversationInterceptor {
     constructor(psid : string) {
         this.psid = psid;
         this.currentConversation = new ConversationSpawner(psid);
+        console.log("making a new conversationinterruptor");
     }
 
     handle(response : string) {

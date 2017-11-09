@@ -12,8 +12,8 @@ export default class ConversationSpawner {
 
     continueConversation(req : any) {
         if (this.currentConversation.hasNext()) {
-            this.currentConversation.continue(req);
             console.log("Continue with current convo");
+            this.currentConversation.continue(req);
         }
 
         else {
@@ -61,6 +61,7 @@ export class PreferencesConversation extends Conversation {
 
 
     continue(req : any) : void {
+        console.log("Continuing prefernces convo");
         this.nextStep(req);
 
     }
