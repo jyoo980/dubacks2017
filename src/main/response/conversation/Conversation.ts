@@ -83,6 +83,7 @@ export class PreferencesConversation extends Conversation {
         }
     }
     askWhichFields(req : any) {
+        console.log("Which fields");
         let fieldOptions : string = "Would you like to update: name, location?";
         this.responseSender.sendResponse(fieldOptions);
         this.nextStep = this.handleFieldsResponse;
@@ -119,6 +120,9 @@ export class PreferencesConversation extends Conversation {
     }
 
     goodbye(req : any) {
+        console.log("bye");
+        this.responseSender.sendResponse("Bye!");
+        this.nextConversation = new WelcomeConversation(this.thisUser);
         // actually should move on to next response - maybe hold a response object?
 
         // return a flag to indicate that next function doesn't exist
