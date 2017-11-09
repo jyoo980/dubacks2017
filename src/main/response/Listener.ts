@@ -9,7 +9,8 @@ const
     app = express().use(bodyParser.json()),
     https = require('https'),
     fs = require('fs'),
-    request = require('request');
+    request = require('request'),
+    cache = require('ConversationCache');
 
 
 export default class Listener {
@@ -104,7 +105,7 @@ export default class Listener {
 
                     let psid = webhookEvent.sender.id;
                     console.log("before getting a conversation");
-                    ConversationCache.getConversation(psid).then(function (handler : ConversationInterceptor) {
+                    cache.getConversation(psid).then(function (handler : ConversationInterceptor) {
                         if (handler != undefined) {
                             console.log("sending response");
                             handler.handle(webhookEvent.message.text);

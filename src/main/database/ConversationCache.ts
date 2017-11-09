@@ -6,7 +6,9 @@ export default class ConversationCache {
 
     // cache the id and the response handler unique to each person
 
-    private constructor() {}
+    private constructor() {
+        console.log("Making a new cache, for some reason?")
+    }
 
     static addKey(psid : string) : Promise<ConversationInterceptor> { // synchronization
         return new Promise(function (fulfill, reject) {
