@@ -76,7 +76,7 @@ export class PreferencesConversation extends Conversation {
     }
 
     handleUpdatePreferencesResponse(req : any) {
-        if (this.cleanString(req.body) === 'no') {
+        if (this.cleanString(req) === 'no') {
             this.nextStep = this.goodbye;
         } else {
             this.nextStep = this.askWhichFields;
