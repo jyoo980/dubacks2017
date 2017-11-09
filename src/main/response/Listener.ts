@@ -94,45 +94,44 @@ export default class Listener {
         });
     }
 
-        processNormalMessage(res : any, body : any) {
-            body.entry.forEach((entry: any) => {
+    processNormalMessage(res : any, body : any) {
+        body.entry.forEach((entry: any) => {
 
-                console.log("processing message");
-                let webhookEvent = entry.messaging[0];
-                console.log(webhookEvent);
+            console.log("processing message");
+            let webhookEvent = entry.messaging[0];
+            console.log(webhookEvent);
 
-                if (webhookEvent.message) {
-                    console.log(webhookEvent.message);
+            if (webhookEvent.message) {
+                console.log(webhookEvent.message);
 
-                    let psid = webhookEvent.sender.id;
-                    console.log("before getting a conversation");
-                    this.cache.getConversation(psid).then(function (handler : ConversationInterceptor) {
-                        if (handler != undefined) {
-                            console.log("sending response");
-                            handler.handle(webhookEvent.message.text);
-                        } else {
-                            console.log("For some reason, handler is undefined");
-                        }
-                    });
+                let psid = webhookEvent.sender.id;
+                console.log("before getting a conversation");
+                let handler: ConversationInterceptor = this.cache.getConversation(psid);
+                if (handler != undefined) {
+                    console.log("sending response");
+                    handler.handle(webhookEvent.message.text);
+                } else {
+                    console.log("For some reason, handler is undefined");
+                }
+            }
+        });
 
-                   /* let conversationInterceptor = new ConversationInterceptor(webhookEvent.sender.id);
-                    let conversation : Conversation = new WelcomeConversation(webhookEvent.sender.id);
-                    //   response.continue(req, res); // need to get a response unique to each person
+        /* let conversationInterceptor = new ConversationInterceptor(webhookEvent.sender.id);
+         let conversation : Conversation = new WelcomeConversation(webhookEvent.sender.id);
+         //   response.continue(req, res); // need to get a response unique to each person
 
-                    conversationInterceptor.handle("report","sfhdjfhas");
-                    console.log("Going to send response");
+         conversationInterceptor.handle("report","sfhdjfhas");
+         console.log("Going to send response");
 */
 
 
-                    //this.sendResponse(webhookEvent.sender.id,
-                    //  {"text": webhookEvent.message.text});
-                    return;
-                }
+        //this.sendResponse(webhookEvent.sender.id,
+        //  {"text": webhookEvent.message.text});
+        return;
+    }
 
-                //  console.log(webhookEvent);
-            });
+    //  console.log(webhookEvent);
 
 }
 
 
-    }
