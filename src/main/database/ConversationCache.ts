@@ -11,7 +11,7 @@ export default class ConversationCache {
     static addKey(psid : string) : Promise<ConversationInterceptor> { // synchronization
         return new Promise(function (fulfill, reject) {
             let conversationHandler = new ConversationInterceptor(psid);
-
+            console.log("Add key to cache - is this necessary");
             ConversationCache.idCache.put(psid, conversationHandler); //function (err: any, res: any) {
                /* if (err) {
                     console.log(err);
