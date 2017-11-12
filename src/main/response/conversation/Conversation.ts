@@ -11,6 +11,10 @@ export default class ConversationSpawner {
     }
 
     continueConversation(req : any) {
+        if (this.naturalRecursion(req)) {
+            this.currentConversation.trustTheNaturalRecursion();
+        }
+
         if (this.currentConversation.hasNext()) {
             console.log("Continue with current convo");
             this.currentConversation.continue(req);
@@ -24,6 +28,10 @@ export default class ConversationSpawner {
             }
         }
     }
+
+    naturalRecursion(req : string) : boolean {
+        return req.includes("recursion");
+}
 
 
 }
@@ -44,6 +52,14 @@ export abstract class Conversation {
 
     hasNext() : boolean {
         return (this.nextStep != undefined);
+    }
+
+    cleanString(toReplace : string) : string {
+        return toReplace.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").trim().toLowerCase();
+    }
+
+    trustTheNaturalRecursion() : void {
+        this.responseSender.sendResponse("Trust the natural recursion :)");
     }
 
     abstract continue(req : any) : void;
@@ -132,10 +148,6 @@ export class PreferencesConversation extends Conversation {
         // actually should move on to next response - maybe hold a response object?
 
         // return a flag to indicate that next function doesn't exist
-    }
-
-    cleanString(toReplace : string) : string {
-        return toReplace.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"").trim().toLowerCase();
     }
 
     finish() {
