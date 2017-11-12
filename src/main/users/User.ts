@@ -1,4 +1,4 @@
-abstract class User {
+export abstract class User {
 
     protected name : string;
     protected isSelling : boolean;

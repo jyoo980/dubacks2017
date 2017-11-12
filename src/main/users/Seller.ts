@@ -1,3 +1,6 @@
+import { SaleItem } from '../item/SaleItem';
+import { User } from './User';
+
 class Seller extends User {
 
     itemsForSale : Array<SaleItem>;

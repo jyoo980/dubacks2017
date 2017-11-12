@@ -1,29 +1,22 @@
 
 import {ConversationInterceptor} from "../response/conversation/ConversationInterceptor";
 
-class Cache {
-    private static cache : Cache;
+export default class ConversationCache {
+    private idCache = require('memory-cache');
+    private static cache : ConversationCache;
 
-    public static getInstance() : Cache {
+    // cache the id and the response handler unique to each person
+
+    public static getInstance() : ConversationCache {
         if (this.cache == null) {
-            this.cache = new Cache();
+            this.cache = new ConversationCache();
         }
         return this.cache;
     }
 
-    protected constructor() {
+    private constructor() {
         console.log("Making a new cache, for some reason?");
     }
-}
-
-export default class ConversationCache extends Cache {
-    private idCache = require('memory-cache');
-
-    private constructor() {
-        super();
-    }
-
-    // cache the id and the response handler unique to each person
 
     addKey(psid : string) : ConversationInterceptor { // synchronization
         let that = this;
@@ -49,7 +42,21 @@ export default class ConversationCache extends Cache {
     }
 }
 
-export class ProfileCache extends Cache {
+export class ProfileCache {
     private profileCache = require('memory-cache');
+    private static cache : ProfileCache;
+
+    public static getInstance() : ProfileCache {
+        if (this.cache == null) {
+            this.cache = new ProfileCache();
+        }
+        return this.cache;
+    }
+
+    private constructor() {
+        console.log("Making a new cache, for some reason?");
+    }
+
+    // add and remove profile information
 
 }
