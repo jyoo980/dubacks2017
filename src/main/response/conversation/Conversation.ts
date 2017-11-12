@@ -67,6 +67,7 @@ export class PreferencesConversation extends Conversation {
 
     }
 
+    // why do I need to send two messages
     askInitialQuestion(req : any) {
         let greeting : string = "Would you like to update your preferences?";
         // res, req
@@ -82,7 +83,7 @@ export class PreferencesConversation extends Conversation {
             console.log("bye");
         } else {
             console.log("move on");
-            this.nextStep = this.askWhichFields;
+            this.askWhichFields(req);
         }
     }
     askWhichFields(req : any) {
@@ -94,6 +95,7 @@ export class PreferencesConversation extends Conversation {
     }
 
     handleFieldsResponse(req : any) {
+        this.nextStep = this.askWhatValue;
         let response = req.body;
         // really elementary
         let fieldToChange = response;
@@ -104,6 +106,7 @@ export class PreferencesConversation extends Conversation {
         let prompt = "What would you like to change the value of " + this.fieldToUpdate + " to?";
         this.responseSender.sendResponse(prompt);
         this.nextStep = this.askResult;
+        this.handleFieldsResponse(req);
     }
 
 
