@@ -3,8 +3,6 @@ import { User } from './User';
 
 class Seller extends User {
 
-    itemsForSale : Array<SaleItem>;
-
     /**
      *
      * @param {string} name: the name of the seller
