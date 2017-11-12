@@ -1,7 +1,7 @@
 import { SaleItem } from '../item/SaleItem';
 import { User } from './User';
 
-class Seller extends User {
+export class Seller extends User {
 
     /**
      *

@@ -1,5 +1,7 @@
 
 import {ConversationInterceptor} from "../response/conversation/ConversationInterceptor";
+import {Seller} from "../users/Seller";
+import {User} from "../users/User";
 
 export default class ConversationCache {
     private idCache = require('memory-cache');
@@ -43,18 +45,32 @@ export default class ConversationCache {
 }
 
 export class ProfileCache {
-    private profileCache = require('memory-cache');
-    private static cache : ProfileCache;
-
-    public static getInstance() : ProfileCache {
-        if (this.cache == null) {
-            this.cache = new ProfileCache();
-        }
-        return this.cache;
-    }
+    private static profileCache = require('memory-cache');
 
     private constructor() {
-        console.log("Making a new cache, for some reason?");
+        console.log("Haha, profile cache should only be instantiated one time!");
+    }
+
+    private static addKey(psid : string) : User { // synchronization
+        let that = this;
+        let profile = new Seller(psid);
+        console.log("Add key to cache - is this necessary");
+        that.profileCache.put(psid, profile);
+        return profile;
+    }
+
+    public static getPreferences(psid : string) {
+        let that = this;
+        console.log("Trying to get a profile for cus");
+        let response = that.profileCache.get(psid);
+        if (response != null) {
+            console.log("Old profile exists");
+            return response;
+        }
+        console.log("added convo");
+        console.log(JSON.stringify(that.profileCache.keys()));
+
+        return that.addKey(psid);
     }
 
     // add and remove profile information

@@ -46,6 +46,10 @@ export abstract class User {
         return true;
         // prevent them from adding things that already exist
     }
-    
+
+    getAllProfileItems() : SaleItem[] {
+        return this.interestedItems;
+    }
+
 
 }

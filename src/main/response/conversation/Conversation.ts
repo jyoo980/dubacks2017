@@ -1,5 +1,8 @@
 
 import ResponseHandler from "../ResponseHandler";
+import { ProfileCache } from "../../database/ConversationCache";
+import {User} from "../../users/User";
+import {SaleItem} from "../../item/SaleItem";
 
 export default class ConversationSpawner {
 
@@ -83,7 +86,6 @@ export class PreferencesConversation extends Conversation {
 
     }
 
-    // why do I need to send two messages
     askInitialQuestion(req : any) {
         let greeting : string = "Would you like to update your preferences?";
         // res, req
@@ -104,18 +106,19 @@ export class PreferencesConversation extends Conversation {
     }
     askWhichFields(req : any) {
         console.log("Which fields");
-        let fieldOptions : string = "Would you like to update: name, location?";
+        let fieldOptions : string = "Would you like to update: name, location, interested items?";
         this.responseSender.sendResponse(fieldOptions);
         this.nextStep = this.handleFieldsResponse;
 
     }
 
     handleFieldsResponse(req : any) {
+        // unilaterally add items for now, because I'm lazy af
+        let profile : User = ProfileCache.getPreferences(this.thisUser);
         this.nextStep = this.askWhatValue;
-        let response = req.body;
         // really elementary
-        let fieldToChange = response;
-
+        let thingToChange : SaleItem = new SaleItem(req);
+        profile.addItemToProfile(thingToChange); // pretend response is a SaleItem... will it cast?
     }
 
     askWhatValue(req : any) {
