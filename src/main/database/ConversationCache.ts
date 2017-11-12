@@ -19,6 +19,10 @@ class Cache {
 export default class ConversationCache extends Cache {
     private idCache = require('memory-cache');
 
+    private constructor() {
+        super();
+    }
+
     // cache the id and the response handler unique to each person
 
     addKey(psid : string) : ConversationInterceptor { // synchronization
