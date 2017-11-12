@@ -1,22 +1,25 @@
 
 import {ConversationInterceptor} from "../response/conversation/ConversationInterceptor";
 
-export default class ConversationCache {
-    private idCache = require('memory-cache');
-    private static cache : ConversationCache;
+class Cache {
+    private static cache : Cache;
 
-    // cache the id and the response handler unique to each person
-
-    public static getInstance() : ConversationCache {
+    public static getInstance() : Cache {
         if (this.cache == null) {
-            this.cache = new ConversationCache();
+            this.cache = new Cache();
         }
         return this.cache;
     }
 
-    private constructor() {
+    protected constructor() {
         console.log("Making a new cache, for some reason?");
     }
+}
+
+export default class ConversationCache extends Cache {
+    private idCache = require('memory-cache');
+
+    // cache the id and the response handler unique to each person
 
     addKey(psid : string) : ConversationInterceptor { // synchronization
         let that = this;
@@ -40,4 +43,9 @@ export default class ConversationCache {
                 return that.addKey(psid);
 
     }
+}
+
+export class ProfileCache extends Cache {
+    private profileCache = require('memory-cache');
+
 }
