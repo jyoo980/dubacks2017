@@ -52,13 +52,13 @@ export default class ResponseHandler {
                 "id": this.psid
             },
             "message": {
-                "text": response
-            },
-            "quick_replies":[
-                {
-                    "content_type":"location"
-                }
-            ]
+                "text": response,
+                "quick_replies":[
+                    {
+                        "content_type":"location"
+                    }
+                ]
+            }
         };
 
         console.log(request_body);
