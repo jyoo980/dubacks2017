@@ -44,4 +44,41 @@ export default class ResponseHandler {
 // request-promise-native perhaps
 
 
+    // refactor out
+    sendQuickResponse(response : any) { //"quick_replies
+// Construct the message body
+        let request_body = {
+            "recipient": {
+                "id": this.psid
+            },
+            "message": {
+                "text": response
+            },
+            "quick_replies":[
+                {
+                    "content_type":"location"
+                }
+            ]
+        };
+
+        console.log(request_body);
+
+        // Send the HTTP request to the Messenger Platform
+        request({
+            "uri": "https://graph.facebook.com/v2.6/me/messages",
+            "qs": { "access_token": PAGE_ACCESS_TOKEN }, //application-json
+            "method": "POST",
+            "json": request_body
+        }, (err : any, res : any, body : any) => {
+            if (!err) {
+                console.log('message sent!');
+                console.log(body);
+            } else {
+                console.error("Unable to send message:" + err);
+                // do more checking
+            }
+        });
+    }
+
+
 }

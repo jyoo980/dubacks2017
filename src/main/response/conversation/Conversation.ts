@@ -108,7 +108,8 @@ export class PreferencesConversation extends Conversation {
         console.log("Which fields");
         let fieldOptions : string = "Would you like to update: name, location, interested items?";
         this.responseSender.sendResponse(fieldOptions);
-        this.nextStep = this.handleFieldsResponse;
+        //this.nextStep = this.handleFieldsResponse;
+        this.nextStep = this.locationResponse;
 
     }
 
@@ -153,10 +154,14 @@ export class PreferencesConversation extends Conversation {
         // return a flag to indicate that next function doesn't exist
     }
 
-    finish() {
-        this.nextConversation; // !!! need to set it here to the next thing!
+    locationResponse() {
+        this.responseSender.sendQuickResponse("Where are you?");
+        this.nextStep = this.finish;
     }
 
+    finish(req : any) {
+        this.nextConversation; // !!! need to set it here to the next thing!
+    }
 
 }
 

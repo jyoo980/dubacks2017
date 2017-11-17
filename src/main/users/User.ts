@@ -43,7 +43,7 @@ export abstract class User {
     }
 
     setLocation(lat : number, lon : number) {
-        
+
     }
 
     addItemToProfile(item: SaleItem): boolean {
