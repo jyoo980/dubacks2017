@@ -6,6 +6,8 @@ export abstract class User {
     protected isSelling: boolean;
     protected isBuying: boolean;
     protected interestedItems: SaleItem[];
+    protected lat : number;
+    protected lon : number;
 
     /**
      *
@@ -38,6 +40,10 @@ export abstract class User {
 
     lookingToBuy() {
         return this.isBuying;
+    }
+
+    setLocation(lat : number, lon : number) {
+        
     }
 
     addItemToProfile(item: SaleItem): boolean {
