@@ -155,7 +155,7 @@ export class PreferencesConversation extends Conversation {
     }
 
     locationResponse() {
-        this.responseSender.sendQuickResponse("Where are you?");
+        this.responseSender.sendLocationResponse("Where are you?");
         this.nextStep = this.finish;
     }
 

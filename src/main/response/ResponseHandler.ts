@@ -45,7 +45,7 @@ export default class ResponseHandler {
 
 
     // refactor out
-    sendQuickResponse(response : any) { //"quick_replies
+    sendLocationResponse(response : any) { //"quick_replies
 // Construct the message body
         let request_body = {
             "recipient": {
@@ -56,6 +56,11 @@ export default class ResponseHandler {
                 "quick_replies":[
                     {
                         "content_type":"location"
+                    },
+                    {
+                        "content_type":"text",
+                        "title":"No thanks",
+                        "payload":"false"
                     }
                 ]
             }
