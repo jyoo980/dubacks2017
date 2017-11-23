@@ -29,6 +29,7 @@ export class ConversationInterceptor {
     }
 
     setLocation(choice : string, payload : string) {
+        console.log("conversationinterceptor setlocation");
         this.currentConversation.setLocation(choice, payload);
     }
 

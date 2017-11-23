@@ -111,10 +111,12 @@ export default class Listener {
                 if (handler != undefined) {
 
                     if (message.quick_reply) {
+                        console.log("quick reply exists");
                         let choice = message.text;
                         let payload = message.quick_reply.payload;
                         handler.setLocation(choice, payload);
                     }
+                    console.log("Quick replydoesn't exist");
 
                     console.log("sending response");
                     handler.handle(webhookEvent.message.text);
