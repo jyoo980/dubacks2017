@@ -96,18 +96,26 @@ export default class Listener {
 
     processNormalMessage(res : any, body : any) {
         body.entry.forEach((entry: any) => {
-
+//we would need to intercept if body has a payload
             console.log("processing message");
             let webhookEvent = entry.messaging[0];
             console.log(webhookEvent);
 
-            if (webhookEvent.message) {
-                console.log(webhookEvent.message);
+            let message = webhookEvent.message;
+            if (message) {
+                console.log(message);
 
                 let psid = webhookEvent.sender.id;
                 console.log("before getting a conversation");
                 let handler: ConversationInterceptor = this.cache.getConversation(psid);
                 if (handler != undefined) {
+
+                    if (message.quick_reply) {
+                        let choice = message.text;
+                        let payload = message.quick_reply.payload;
+                        handler.setLocation(choice, payload);
+                    }
+
                     console.log("sending response");
                     handler.handle(webhookEvent.message.text);
                 } else {

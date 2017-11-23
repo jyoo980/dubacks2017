@@ -36,6 +36,10 @@ export default class ConversationSpawner {
         return req.includes("recursion");
 }
 
+    setLocation(choice : string, payload : string) {
+        console.log("location: ", payload);
+    }
+
 
 }
 

@@ -28,6 +28,10 @@ export class ConversationInterceptor {
         }
     }
 
+    setLocation(choice : string, payload : string) {
+        this.currentConversation.setLocation(choice, payload);
+    }
+
     resetCurrentString(newString : string) {
         this.currentResponse = newString;
     }
