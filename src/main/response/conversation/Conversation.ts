@@ -38,6 +38,8 @@ export default class ConversationSpawner {
 
     setLocation(choice : string, payload : string) {
         console.log("location: ", payload);
+        this.currentConversation.responseSender.sendResponse("So you are at " + payload + "?");
+
     }
 
 
@@ -158,9 +160,13 @@ export class PreferencesConversation extends Conversation {
         // return a flag to indicate that next function doesn't exist
     }
 
-    locationResponse() {
+    locationResponse(req : any) {
         this.responseSender.sendLocationResponse("Where are you?");
-        this.nextStep = this.finish;
+        this.nextStep = this.printChanges;
+    }
+
+    printChanges(req: any) {
+        this.responseSender.sendResponse("So you are at " + req + ". Updated location.");
     }
 
     finish(req : any) {
