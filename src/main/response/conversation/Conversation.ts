@@ -94,11 +94,7 @@ export class PreferencesConversation extends Conversation {
 
     locationResponse(req : any) {
         this.responseSender.sendLocationResponse("Where are you?");
-        this.nextStep = this.printChanges;
-    }
-
-    printChanges(req: any) {
-        this.responseSender.sendResponse("So you are at " + req + ". Updated location.");
+        this.nextStep = this.finish;
     }
 
     finish(req : any) {

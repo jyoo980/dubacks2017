@@ -64,7 +64,8 @@ export class ResponseInterceptor {
 }
 
 export enum QuickResponses {
-    LOCATION
+    LOCATION,
+    FIELDS
 }
 
 export class QuickResponseInterceptor {
@@ -78,10 +79,16 @@ export class QuickResponseInterceptor {
         return "updated something, presumably";
     }
 
+    static chooseFieldResponse(response : string, selection : string) {
+        return "Okay, setting field " + response + " to " + selection;
+    }
+
     static getResponse(response : string, selection : string) : string {
         switch (response) {
             case (this.toString(QuickResponses.LOCATION)) :
                 return this.doLocationResponse();
+            case (this.toString(QuickResponses.FIELDS)):
+                return this.chooseFieldResponse(response, selection);
             default:
                 return "default";
         }

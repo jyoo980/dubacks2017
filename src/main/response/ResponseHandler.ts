@@ -31,20 +31,7 @@ export default class ResponseHandler {
         console.log(request_body);
 
         // Send the HTTP request to the Messenger Platform
-        request({
-            "uri": "https://graph.facebook.com/v2.6/me/messages",
-            "qs": { "access_token": PAGE_ACCESS_TOKEN }, //application-json
-            "method": "POST",
-            "json": request_body
-        }, (err : any, res : any, body : any) => {
-            if (!err) {
-                console.log('message sent!');
-                console.log(body);
-            } else {
-                console.error("Unable to send message:" + err);
-                // do more checking
-            }
-        });
+        ResponseHandler.deliverMessage(request_body);
     }
 
     // refactor out
@@ -70,13 +57,49 @@ export default class ResponseHandler {
         };
 
         console.log(request_body);
+        ResponseHandler.deliverMessage(request_body);
 
-        // Send the HTTP request to the Messenger Platform
+    }
+
+
+    sendFieldsResponse(response : any) {
+        let request_body = {
+            "recipient": {
+                "id": this.psid
+            },
+            "message": {
+                "text": response,
+                "quick_replies":[
+                    {
+                        "content_type":"text",
+                        "title":"Preferences",
+                        "payload":"FIELDS"
+                    },
+                    {
+                        "content_type":"text",
+                        "title":"Location",
+                        "payload":"FIELDS"
+                    },
+                    {
+                        "content_type":"text",
+                        "title":"Name",
+                        "payload":"FIELDS"
+                    }
+                ]
+            }
+        };
+
+        console.log(request_body);
+        ResponseHandler.deliverMessage(request_body);
+    }
+
+    // Send the HTTP request to the Messenger Platform
+    private static deliverMessage (requestBody : any) {
         request({
             "uri": "https://graph.facebook.com/v2.6/me/messages",
             "qs": { "access_token": PAGE_ACCESS_TOKEN }, //application-json
             "method": "POST",
-            "json": request_body
+            "json": requestBody
         }, (err : any, res : any, body : any) => {
             if (!err) {
                 console.log('message sent!');
@@ -87,6 +110,5 @@ export default class ResponseHandler {
             }
         });
     }
-
 
 }
