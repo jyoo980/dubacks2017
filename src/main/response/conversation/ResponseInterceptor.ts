@@ -83,7 +83,7 @@ export class QuickResponseInterceptor {
             case (this.toString(QuickResponses.LOCATION)) :
                 return this.doLocationResponse();
             default:
-                return "";
+                return "default";
         }
     }
 

@@ -76,36 +76,11 @@ export class PreferencesConversation extends Conversation {
 
     }
 
-    handleFieldsResponse(req : any) {
-        // unilaterally add items for now, because I'm lazy af
-        let profile : User = ProfileCache.getPreferences(this.thisUser);
-        this.nextStep = this.askWhatValue;
-        // really elementary
-        let thingToChange : SaleItem = new SaleItem(req);
-        profile.addItemToProfile(thingToChange); // pretend response is a SaleItem... will it cast?
-    }
-
-    askWhatValue(req : any) {
-        let prompt = "What would you like to change the value of " + this.fieldToUpdate + " to?";
-        this.responseSender.sendResponse(prompt);
-        this.nextStep = this.askResult;
-        this.handleFieldsResponse(req);
-    }
-
-
     askTryAgain(req : any) {
         let askAgain : string = "Sorry, I didn't quite catch that. Could you repeat it? Please keep your responses as simple as possible.";
         this.responseSender.sendResponse(askAgain);
         this.nextStep = this.askWhichFields;
 
-    }
-
-    askResult(req : any) {
-        this.valueToReplace = req.body;
-        //User.updateValue; // doesn't exist yet
-        let result = "Updating " + this.fieldToUpdate + " to " + this.valueToReplace;
-        this.responseSender.sendResponse(result);
-        // actually change it now
     }
 
     goodbye(req : any) {
@@ -127,6 +102,7 @@ export class PreferencesConversation extends Conversation {
     }
 
     finish(req : any) {
+        this.responseSender.sendResponse("bye");
         this.nextConversation; // !!! need to set it here to the next thing!
     }
 
