@@ -13,10 +13,15 @@ export default class ResponseHandler {
     }
 
     sendResponse(response : any) {
+        ResponseHandler.sendResponse(response, this.psid);
+    }
+// request-promise-native perhaps
+
+    static sendResponse(response : any, psid : string) {
         // Construct the message body
         let request_body = {
             "recipient": {
-                "id": this.psid
+                "id": psid
             },
             "message": {
                 "text": response
@@ -41,8 +46,6 @@ export default class ResponseHandler {
             }
         });
     }
-// request-promise-native perhaps
-
 
     // refactor out
     sendLocationResponse(response : any) { //"quick_replies

@@ -1,19 +1,19 @@
-/// <reference path="../../../../node_modules/@types/mocha/index.d.ts" />
+/// <reference path="../../node_modules/@types/mocha/index.d.ts" />
 //import "mocha";
 import {expect} from "chai";
-import {ConversationInterceptor} from "./ConversationInterceptor";
-import ResponseHandler from "../ResponseHandler";
-// from '../src/main/response/conversation/ConversationInterceptor.ts';
+import {ResponseInterceptor} from "../main/response/conversation/ResponseInterceptor";
+import ResponseHandler from "../main/response/ResponseHandler";
+// from '../src/main/response/conversation/ResponseInterceptor.ts';
 
 
 let FINAL_ID = "8473241";
 let responseHandler = new ResponseHandler(FINAL_ID);
-let conversationInterceptor : ConversationInterceptor;
+let conversationInterceptor : ResponseInterceptor;
 
 describe("", function() {
 
     before("", function() {
-     //   conversationInterceptor = new ConversationInterceptor();
+     //   conversationInterceptor = new ResponseInterceptor();
     });
 
 

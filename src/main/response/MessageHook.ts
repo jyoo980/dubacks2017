@@ -1,5 +1,5 @@
 
-import {ConversationInterceptor} from "./conversation/ConversationInterceptor";
+import {ResponseInterceptor} from "./conversation/ResponseInterceptor";
 import ConversationCache from "../database/ConversationCache";
 
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN || "EAAVRCYBeJgwBAD27bGm7xA4B7pBjfqzy7E9KqthUqJUD5lZAdXPCGYZBiWHk9sznZCHSEmXFYSWc6DNyZAfjKGeKZAED4bbt1g42hER6RMV9QDfdqOvdLQVJiK21Mymm3J7jIZCWfPLoOZCX48SHIgfWP5Yp7R7JaLqOZAwPWBxgCQZDZD";
@@ -12,7 +12,7 @@ const
     request = require('request');
 
 
-export default class Listener {
+export default class MessageHook {
 
     cache : ConversationCache;
 
@@ -107,7 +107,7 @@ export default class Listener {
 
                 let psid = webhookEvent.sender.id;
                 console.log("before getting a conversation");
-                let handler: ConversationInterceptor = this.cache.getConversation(psid);
+                let handler: ResponseInterceptor = this.cache.getConversation(psid);
                 if (handler != undefined) {
 
                     if (message.quick_reply) {
@@ -126,7 +126,7 @@ export default class Listener {
             }
         });
 
-        /* let conversationInterceptor = new ConversationInterceptor(webhookEvent.sender.id);
+        /* let conversationInterceptor = new ResponseInterceptor(webhookEvent.sender.id);
          let conversation : Conversation = new WelcomeConversation(webhookEvent.sender.id);
          //   response.continue(req, res); // need to get a response unique to each person
 

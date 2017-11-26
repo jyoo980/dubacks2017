@@ -1,5 +1,5 @@
 
-import {ConversationInterceptor} from "../response/conversation/ConversationInterceptor";
+import {ResponseInterceptor} from "../response/conversation/ResponseInterceptor";
 import {Seller} from "../users/Seller";
 import {User} from "../users/User";
 
@@ -20,15 +20,15 @@ export default class ConversationCache {
         console.log("Making a new cache, for some reason?");
     }
 
-    addKey(psid : string) : ConversationInterceptor { // synchronization
+    addKey(psid : string) : ResponseInterceptor { // synchronization
         let that = this;
-            let conversationHandler = new ConversationInterceptor(psid);
+            let conversationHandler = new ResponseInterceptor(psid);
             console.log("Add key to cache - is this necessary");
             that.idCache.put(psid, conversationHandler);
             return conversationHandler;
     }
 
-    getConversation(psid : string) : ConversationInterceptor {
+    getConversation(psid : string) : ResponseInterceptor {
         let that = this;
                 console.log("Trying to get a conversation for cus");
                 let response = that.idCache.get(psid);
