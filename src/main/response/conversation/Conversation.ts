@@ -70,7 +70,7 @@ export class PreferencesConversation extends Conversation {
     askWhichFields(req : any) {
         console.log("Which fields");
         let fieldOptions : string = "Would you like to update: name, location, interested items?";
-        this.responseSender.sendResponse(fieldOptions);
+        this.responseSender.sendFieldsResponse(fieldOptions);
         //this.nextStep = this.handleFieldsResponse;
         this.nextStep = this.locationResponse;
 
