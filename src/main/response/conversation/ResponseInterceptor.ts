@@ -84,7 +84,7 @@ export class QuickResponseInterceptor {
     }
 
     static getResponse(response : string, selection : string) : string {
-        switch (response) {
+        switch (selection) { //response
             case (this.toString(QuickResponses.LOCATION)) :
                 return this.doLocationResponse();
             case (this.toString(QuickResponses.FIELDS)):
