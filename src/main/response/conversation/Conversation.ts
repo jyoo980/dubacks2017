@@ -98,7 +98,7 @@ export class PreferencesConversation extends Conversation {
     }
 
     finish(req : any) {
-        this.responseSender.sendResponse("So now your location is" + ProfileCache.getPreferences(psid).get);
+        this.responseSender.sendResponse("So now your location is" + ProfileCache.getPreferences(this.thisUser).getLocation());
         this.nextConversation; // !!! need to set it here to the next thing!
     }
 
