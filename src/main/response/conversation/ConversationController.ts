@@ -35,8 +35,6 @@ export default class ConversationController {
     setLocation(choice : string, payload : string) {
         console.log("location: ", payload);
         this.currentConversation.responseSender.sendResponse("So you are at " + payload + "?");
-
     }
-
 
 }

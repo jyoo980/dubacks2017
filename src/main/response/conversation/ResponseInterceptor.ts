@@ -1,5 +1,6 @@
 import ConversationController from "./ConversationController";
 import ResponseHandler from "../ResponseHandler";
+import {ProfileCache} from "../../database/ConversationCache";
 
 export class ResponseInterceptor {
 
@@ -79,23 +80,26 @@ export class QuickResponseInterceptor {
         return "updated something, presumably";
     }
 
-    static chooseFieldResponse(response : string, selection : string) {
+    static chooseFieldResponse(psid: string, response : string, selection : string) {
+        let user = ProfileCache.getPreferences(psid);
+        user.setLocation(response, response);
         return "Okay, setting field " + response + " to " + selection;
     }
 
-    static getResponse(response : string, selection : string) : string {
+    static getResponse(psid : string, response : string, selection : string) : string {
         switch (selection) { //response
             case (this.toString(QuickResponses.LOCATION)) :
                 return this.doLocationResponse();
             case (this.toString(QuickResponses.FIELDS)):
-                return this.chooseFieldResponse(response, selection);
+                return this.chooseFieldResponse(psid, response, selection);
             default:
                 return "default";
         }
     }
 
     static handle(psid: string, res: string, selection: string) {
-        let response : string = this.getResponse(res, selection);
+        let response : string = this.getResponse(psid, res, selection);
+        this.psid = psid;
         ResponseHandler.sendResponse(response, psid);
     }
 
