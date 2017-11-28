@@ -43,7 +43,12 @@ export abstract class User {
     }
 
     setLocation(lat : number, lon : number) {
+        this.lat = lat;
+        this.lon = lon;
+    }
 
+    getLocation() : string {
+        return this.lat.toString() + this.lon.toString();
     }
 
     addItemToProfile(item: SaleItem): boolean {

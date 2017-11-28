@@ -99,7 +99,6 @@ export class QuickResponseInterceptor {
 
     static handle(psid: string, res: string, selection: string) {
         let response : string = this.getResponse(psid, res, selection);
-        this.psid = psid;
         ResponseHandler.sendResponse(response, psid);
     }
 
