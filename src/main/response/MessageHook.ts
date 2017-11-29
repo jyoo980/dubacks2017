@@ -112,14 +112,15 @@ export default class MessageHook {
 
                     if (message.quick_reply) {
                         console.log("quick reply exists");
-                        let choice = message.text;
+                        let title = message.text;
                         let payload = message.quick_reply.payload;
-                        handler.setLocation(choice, payload);
-                    }
-                    console.log("Quick replydoesn't exist");
+                        handler.setLocation(title, payload);
+                    } else {
+                        console.log("Quick replydoesn't exist");
 
-                    console.log("sending response");
-                    handler.handle(webhookEvent.message.text);
+                        console.log("sending response");
+                        handler.handle(webhookEvent.message.text);
+                    }
                 } else {
                     console.log("For some reason, handler is undefined");
                 }

@@ -83,7 +83,7 @@ export class QuickResponseInterceptor {
     static chooseFieldResponse(psid: string, response : string, selection : string) {
         let user = ProfileCache.getPreferences(psid);
         user.setLocation(response, response);
-        return "Okay, setting field " + response + " to " + selection;
+        return "Okay, setting field " + selection + " to " + response;
     }
 
     static getResponse(psid : string, title : string, payload : string) : string {
