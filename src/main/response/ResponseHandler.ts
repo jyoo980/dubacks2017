@@ -72,17 +72,17 @@ export default class ResponseHandler {
                 "quick_replies":[
                     {
                         "content_type":"text",
-                        "title":"Preferences",
+                        "title":"My Preferences",
                         "payload":"FIELDS"
                     },
                     {
                         "content_type":"text",
-                        "title":"Location",
+                        "title":"My Location",
                         "payload":"FIELDS"
                     },
                     {
                         "content_type":"text",
-                        "title":"Name",
+                        "title":"My Name",
                         "payload":"FIELDS"
                     }
                 ]

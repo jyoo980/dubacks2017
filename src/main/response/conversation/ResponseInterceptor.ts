@@ -30,8 +30,8 @@ export class ResponseInterceptor {
         }
     }
 
-    setLocation(choice : string, payload : string) {
-        QuickResponseInterceptor.handle(this.psid, choice, payload);
+    setLocation(title : string, payload : string) {
+        QuickResponseInterceptor.handle(this.psid, title, payload);
     }
 
     resetCurrentString(newString : string) {
@@ -86,19 +86,19 @@ export class QuickResponseInterceptor {
         return "Okay, setting field " + response + " to " + selection;
     }
 
-    static getResponse(psid : string, response : string, selection : string) : string {
-        switch (selection) { //response
+    static getResponse(psid : string, title : string, payload : string) : string {
+        switch (payload) { //response
             case (this.toString(QuickResponses.LOCATION)) :
                 return this.doLocationResponse();
             case (this.toString(QuickResponses.FIELDS)):
-                return this.chooseFieldResponse(psid, response, selection);
+                return this.chooseFieldResponse(psid, title, payload);
             default:
                 return "default";
         }
     }
 
-    static handle(psid: string, res: string, selection: string) {
-        let response : string = this.getResponse(psid, res, selection);
+    static handle(psid: string, title: string, payload: string) {
+        let response : string = this.getResponse(psid, title, payload);
         ResponseHandler.sendResponse(response, psid);
     }
 
