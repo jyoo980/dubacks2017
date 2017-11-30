@@ -12,7 +12,7 @@ export class DbUtil {
             {host : "172.17.0.2",
             user:"application",
             password: "dubbyfoods",
-            database: "tests"});
+            database: "test"});
 
         connection.connect(function (err : any) {
             if (err) throw err;
