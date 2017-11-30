@@ -52,7 +52,7 @@ export class ResponseInterceptor {
     }
 
     shouldInsert() {
-        return this.isStringEqualTo("insert");
+        return this.currentResponse.includes("insert");
     }
 
     isStringEqualTo(searchFor : string) : boolean {
