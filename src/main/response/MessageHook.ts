@@ -117,7 +117,6 @@ export default class MessageHook {
                         handler.setLocation(title, payload);
                     } else {
                         console.log("Quick replydoesn't exist");
-
                         console.log("sending response");
                         handler.handle(webhookEvent.message.text);
                     }
