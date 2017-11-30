@@ -7,7 +7,7 @@ export class DbUtil {
 // possible to only pass in a function that consumes a connection?
 
     // yeah idk if this will work, haha.
-    public doWithConnection(execute : (connection : any) => any) {
+    public static doWithConnection(execute : (connection : any) => any) {
         let connection : any = mysql.createConnection(
             {host : "172.17.0.2",
             user:"application",
@@ -20,7 +20,7 @@ export class DbUtil {
     }
 
     // unsafe atm!!
-    private insertPerson(person : User, comments : string) {
+    public static insertPerson(person : User, comments : string) {
         let sql : string = " INSERT INTO person " +
             " (name, seller, registration, comments) " +
             " VALUES (" + person.getName() + ", 1, NOW(), " + comments + ");";
@@ -30,7 +30,7 @@ export class DbUtil {
                 console.log("Yay, no error! Database insert was fine.");
             })
         };
-        this.doWithConnection(executeSql);
+        DbUtil.doWithConnection(executeSql);
         console.log("Done doWithConnection");
     }
 

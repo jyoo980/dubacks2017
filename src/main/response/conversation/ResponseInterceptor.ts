@@ -1,6 +1,8 @@
 import ConversationController from "./ConversationController";
 import ResponseHandler from "../ResponseHandler";
 import {ProfileCache} from "../../database/ConversationCache";
+import {DbUtil} from "../../database/DbUtil";
+import {Seller} from "../../users/Seller";
 
 export class ResponseInterceptor {
 
@@ -24,6 +26,9 @@ export class ResponseInterceptor {
         } else if (this.shouldReport()) {
             console.log("Should report");
             this.interceptReport();
+        } else if (this.shouldInsert()) {
+            console.log("Insert person to db");
+            this.insertPerson(response);
         } else {
             console.log("Continuing conversation");
             this.currentConversation.continueConversation(this.currentResponse);
@@ -46,6 +51,10 @@ export class ResponseInterceptor {
         return this.isStringEqualTo("report");
     }
 
+    shouldInsert() {
+        return this.isStringEqualTo("insert");
+    }
+
     isStringEqualTo(searchFor : string) : boolean {
         let interrupt : boolean = false;
         let toCheck : string = this.currentResponse.trim().toLowerCase();
@@ -61,6 +70,13 @@ export class ResponseInterceptor {
 
     private interceptReset() {
         console.log("Not yet implemented")
+    }
+
+    private insertPerson(response : string) {
+        let name = response.split(":")[1];
+        let person = new Seller(name);
+        DbUtil.insertPerson(person, "Inserted just now");
+        ResponseHandler.sendResponse("I've inserted " + name, this.psid);
     }
 }
 
