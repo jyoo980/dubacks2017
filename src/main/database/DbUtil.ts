@@ -25,7 +25,7 @@ export class DbUtil {
     public static insertPerson(person : User, comments : string) {
         let sql : string = " INSERT INTO person " +
             " (name, seller, registration, comments) " +
-            " VALUES (" + person.getName() + ", 1, NOW(), " + comments + ");";
+            ' VALUES ("' + person.getName() + '", 1, NOW(), "' + comments + '");';
         let executeSql = function(connection : any) {
             connection.query(sql, function (err: any, result: any) {
                 if (err) throw err;
