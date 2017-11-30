@@ -21,6 +21,7 @@ export class DbUtil {
     }
 
     // unsafe atm!!
+    // abstract further even
     public static insertPerson(person : User, comments : string) {
         let sql : string = " INSERT INTO person " +
             " (name, seller, registration, comments) " +
