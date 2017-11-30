@@ -11,7 +11,8 @@ export class DbUtil {
         let connection : any = mysql.createConnection(
             {host : "172.17.0.2",
             user:"application",
-            password: "dubbyfoods"});
+            password: "dubbyfoods",
+            database: "tests"});
 
         connection.connect(function (err : any) {
             if (err) throw err;
