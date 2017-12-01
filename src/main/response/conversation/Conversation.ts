@@ -3,6 +3,7 @@ import ResponseHandler from "../ResponseHandler";
 import { ProfileCache } from "../../database/ConversationCache";
 import {User} from "../../users/User";
 import {SaleItem} from "../../item/SaleItem";
+import {DbUtil} from "../../database/DbUtil";
 
 export abstract class Conversation {
 
@@ -99,6 +100,7 @@ export class PreferencesConversation extends Conversation {
 
     finish(req : any) {
         let user = ProfileCache.getPreferences(this.thisUser);
+        DbUtil.updateProfile(user, "comments", "Updated location");
         this.responseSender.sendResponse("So now your location is" + user.getLocation());
         this.nextConversation = new WelcomeConversation(this.thisUser); // !!! need to set it here to the next thing!
     }
