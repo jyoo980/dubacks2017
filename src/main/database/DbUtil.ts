@@ -40,8 +40,8 @@ export class DbUtil {
     }
 
     public static updateProfile(person : User, field : string, newValue : string) {
-        let sql : string = "UPDATE person SET '" + field + "' = '" + newValue
-        + "' WHERE person.name = '"+ person.getName() + "' ;"; // !!! change to unique key!
+        let sql : string = 'UPDATE person SET "' + field + '" = "' + newValue
+        + '" WHERE person.name = "'+ person.getName() + '" ;'; // !!! change to unique key!
         DbUtil.doWithConnection((connection : any) => this.executeSql(sql, connection));
     }
 }
