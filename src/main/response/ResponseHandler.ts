@@ -37,13 +37,7 @@ export default class ResponseHandler {
     // refactor out
     sendLocationResponse(response : any) { //"quick_replies
 // Construct the message body
-        let request_body = {
-            "recipient": {
-                "id": this.psid
-            },
-            "message": {
-                "text": response,
-                "quick_replies":[
+       let quickRepliesField = [
                     {
                         "content_type":"location"
                     },
@@ -52,24 +46,14 @@ export default class ResponseHandler {
                         "title":"No thanks",
                         "payload":"false"
                     }
-                ]
-            }
-        };
+                ];
 
-        console.log(request_body);
-        ResponseHandler.deliverMessage(request_body);
-
+       this.sendQuickResponse(response, quickRepliesField);
     }
 
 
     sendFieldsResponse(response : any) {
-        let request_body = {
-            "recipient": {
-                "id": this.psid
-            },
-            "message": {
-                "text": response,
-                "quick_replies":[
+        let quickRepliesField = [
                     {
                         "content_type":"text",
                         "title":"My Preferences",
@@ -85,7 +69,19 @@ export default class ResponseHandler {
                         "title":"My Name",
                         "payload":"FIELDS"
                     }
-                ]
+                ];
+
+        this.sendQuickResponse(response, quickRepliesField);
+    }
+
+    sendQuickResponse(response : any, quickRepliesField : any) {
+        let request_body = {
+            "recipient": {
+                "id": this.psid
+            },
+            "message": {
+                "text": response,
+                "quick_replies": quickRepliesField
             }
         };
 
@@ -110,5 +106,7 @@ export default class ResponseHandler {
             }
         });
     }
+
+
 
 }
