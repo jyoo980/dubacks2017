@@ -106,7 +106,6 @@ export default class MessageHook {
                 console.log(message);
 
                 let psid = webhookEvent.sender.id;
-                console.log("before getting a conversation");
                 let handler: ResponseInterceptor = this.cache.getConversation(psid);
                 if (handler != undefined) {
 
@@ -117,7 +116,6 @@ export default class MessageHook {
                         handler.setLocation(title, payload);
                     } else {
                         console.log("Quick replydoesn't exist");
-                        console.log("sending response");
                         handler.handle(webhookEvent.message.text);
                     }
                 } else {
@@ -126,21 +124,9 @@ export default class MessageHook {
             }
         });
 
-        /* let conversationInterceptor = new ResponseInterceptor(webhookEvent.sender.id);
-         let conversation : Conversation = new WelcomeConversation(webhookEvent.sender.id);
-         //   response.continue(req, res); // need to get a response unique to each person
-
-         conversationInterceptor.handle("report","sfhdjfhas");
-         console.log("Going to send response");
-*/
-
-
-        //this.sendResponse(webhookEvent.sender.id,
-        //  {"text": webhookEvent.message.text});
         return;
     }
 
-    //  console.log(webhookEvent);
 
 }
 
