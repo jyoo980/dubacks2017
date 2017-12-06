@@ -51,9 +51,9 @@ export class ProfileCache {
         console.log("Haha, profile cache should only be instantiated one time!");
     }
 
-    private static addKey(psid : string) : User { // synchronization
+    private static addKey(name : string, psid : string) : User { // synchronization
         let that = this;
-        let profile = new Seller(psid);
+        let profile = new Seller(name, psid);
         console.log("Add key to cache - is this necessary");
         that.profileCache.put(psid, profile);
         return profile;
@@ -70,7 +70,8 @@ export class ProfileCache {
         console.log("added convo");
         console.log(JSON.stringify(that.profileCache.keys()));
 
-        return that.addKey(psid);
+        // !!! two versions, one that auto-adds, other that doesn;t...
+        return that.addKey(psid, psid);
     }
 
     // add and remove profile information

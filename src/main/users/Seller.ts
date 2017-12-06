@@ -9,8 +9,8 @@ export class Seller extends User {
      * Note: isSelling set to true, isBuying set to false as default
      *
      */
-    constructor(name : string) {
-        super(name, true, false);
+    constructor(name : string, psid : string) {
+        super(name, psid);
     }
 
 

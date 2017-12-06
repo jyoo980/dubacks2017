@@ -74,7 +74,7 @@ export class ResponseInterceptor {
 
     private insertPerson(response : string) {
         let name = response.split(":")[1];
-        let person = new Seller(name);
+        let person = new Seller(name, this.psid); // no real psid
         DbUtil.insertPerson(person, "Inserted just now");
         ResponseHandler.sendResponse("I've inserted " + name, this.psid);
     }

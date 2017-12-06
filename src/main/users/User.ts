@@ -2,6 +2,7 @@ import { SaleItem } from '../item/SaleItem';
 
 export abstract class User {
 
+    protected psid : string;
     protected name: string;
     protected isSelling: boolean;
     protected isBuying: boolean;
@@ -15,10 +16,8 @@ export abstract class User {
      * @param {boolean} isSelling:  true if this user is selling, else false
      * @param {boolean} isBuying:   true if this user is buying, else false
      */
-    constructor(name: string, isSelling: boolean, isBuying: boolean) {
+    constructor(name: string, psid: string) {
         this.name = name;
-        this.isSelling = isSelling;
-        this.isBuying = isBuying;
     }
 
     // getters
