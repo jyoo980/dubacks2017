@@ -33,6 +33,7 @@
     "@types/memory-cache": "^0.2.0",
     "@types/mysql": "^2.15.2",
     "@types/request": "^2.0.6",
+    "config": "^1.29.2",
     "memory-cache": "^0.2.0",
     "mysql": "^2.15.0",
     "request": "^2.83.0",

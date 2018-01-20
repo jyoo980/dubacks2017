@@ -1,0 +1,19 @@
+{
+	"database": {
+		"host": "localhost",
+		"port":3309,
+		"user":"system",
+		"password":""
+	},
+	"authentication": {
+		"verifyToken":"EAAVRCYBeJgwBAD27bGm7xA4B7pBjfqzy7E9KqthUqJUD5lZAdXPCGYZBiWHk9sznZCHSEmXFYSWc6DNyZAfjKGeKZAED4bbt1g42hER6RMV9QDfdqOvdLQVJiK21Mymm3J7jIZCWfPLoOZCX48SHIgfWP5Yp7R7JaLqOZAwPWBxgCQZDZD",
+		"cert":{
+			"keyPath":"/etc/letsencrypt/live/dubbyfoods.ca/privkey.pem",
+			"certPath":"/etc/letsencrypt/live/dubbyfoods.ca/fullchain.pem"
+		}
+	},
+	"server": {
+		"host":"localhost",
+		"port":443
+	}
+}
